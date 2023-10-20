@@ -1,6 +1,7 @@
 import { set } from 'mongoose';
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
+import DropdownMenu from './dropdown';
 
 const NavigationLayout = () => {
     const [showCatalystLinks, setShowCatalystLinks] = useState(false);
@@ -63,6 +64,12 @@ const NavigationLayout = () => {
                         </div>
                         <div className=' w-16 text-center'>
                             <Link to="/catalyst/homepage">Catalyst Homepage</Link>
+                        </div>
+                        <div>
+                            <DropdownMenu />
+                        </div>
+                        <div>
+                            <Link to="/catalyst/add-homepage">Add Catalyst Hompage</Link>
                         </div>
                         <div className=' w-16 text-center'>
                             <Link to="/catalyst/current-events">Current Events</Link>
