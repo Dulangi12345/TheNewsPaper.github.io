@@ -49,6 +49,19 @@ const AddCatalystHomepage = () => {
       const oldImageRef = ref(storage, oldImageURL);
       await deleteObject(oldImageRef);
       setWasImageDeleted(!wasImageDeleted);
+
+      //delete dwnldURL from firestore
+      updateDoc(docReference, {
+        articleImage: '',
+      }).then(() => {
+        // console.log('Document successfully updated with articleImage URL.');
+      }).catch((updateError) => {
+        console.error('Error updating document:', updateError);
+      });
+
+      await fetchTitleAndContent();
+
+
       console.log('Old image deleted successfully.');
     } catch (error) {
       console.log('error deleting old image', error)
@@ -93,7 +106,7 @@ const AddCatalystHomepage = () => {
       const storageRef = ref(storage, 'CatalystArticleImages');
       const docSnap = await getDoc(docReference);
       const oldImageURL = docSnap.data().articleImage;
-      
+
       await setDoc(docReference, {
         title: title,
         articleContent: articleContent,
@@ -185,18 +198,16 @@ const AddCatalystHomepage = () => {
           </div>
 
           <div>
-
             {imageURL && <img src={imageURL} alt="" className='w-1/4' />}
 
-            <button onClick={
-              deleteImage
-            } type="button">
-              <span role="img" aria-label="delete">🗑️</span>
-            
-            </button>
+            {imageURL && (
+              <button onClick={deleteImage} type="button">
+                <span role="img" aria-label="delete">🗑️</span>
+              </button>
+            )}
           </div>
 
-          
+
 
 
           <div>
