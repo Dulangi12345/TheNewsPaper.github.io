@@ -12,6 +12,8 @@ import AnimeCorner from './pages/Catalyst/AnimeCorner';
 import InhouseComic from './pages/Catalyst/InhouseComic';
 import KatalystHomepage from './pages/Kagura/KaguraHomepage';
 import CTTHomepage from './pages/CTT/CTTHomepage';
+import AddCatalystHomepage from './admin/Catalyst/AddCatalystHomepage';
+import CatalystHomepagePreview from './admin/Catalyst/CatalystHomepagePreview';
 
 const AppRoutes = () => {
     return (
@@ -27,6 +29,9 @@ const AppRoutes = () => {
             <Route path="/catalyst/anime-corner" element={<AnimeCorner />} />
             <Route path="/catalyst/other-extras" element={<OtherExtras />} />
             <Route path="/catalyst/inhouse-comic" element={<InhouseComic />} />
+            <Route path="/catalyst/add-homepage" element={<AddCatalystHomepage />} />
+            <Route path="/admin/Catalyst/CatalystHomepagePreview" element={<CatalystHomepagePreview />} />
+
             <Route path="*" element={<Navigate to="/" />} />
 
             <Route path="/kagura/homepage" element={<KatalystHomepage />} />
