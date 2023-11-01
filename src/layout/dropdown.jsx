@@ -1,11 +1,60 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { db } from "../firebase";
+import { collection , query  , getDocs } from "firebase/firestore/lite";
+import { useNavigate } from "react-router-dom";
 
 const DropdownMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [selectedIndex, setSelectedIndex] = useState(null);
+    const [articles, setArticles] = useState([]);
+    const navigate = useNavigate(); 
+
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
+
+
+    const handleSelectedArticle = (index) => {
+        setSelectedIndex(index);
+        setIsOpen(false);
+        const articleId = articles[index].id;
+        console.log(articleId);
+        navigate(`/catalyst/free-articles/${articleId}`);
+        
+     };
+
+
+    useEffect(() => {
+        fetchArticleIndices();
+    }, []);
+
+
+    const fetchArticleIndices = async () => {
+        try {
+
+            const collectionReference = collection(db, "CatalystFreeArticles");
+            const querySnapshot = await getDocs(collectionReference);
+
+            const articles = [];
+            querySnapshot.forEach((doc) => {
+                const article = doc.data();
+                article.id = doc.id;
+                articles.push(article);
+            });
+
+            setArticles(articles);
+  
+        } catch (error) {
+            console.log(error); 
+        }
+
+
+    }
+
+ 
+
 
     return (
         <div className="relative">
@@ -34,41 +83,27 @@ const DropdownMenu = () => {
                 </svg>
             </button>
 
-            {isOpen && ( // Render dropdown menu if isOpen state is true
+            {isOpen && (
                 <div className="z-10 absolute top-full left-0 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-                        <li>
-                            <a
-                                href="#"
-                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                                Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                                Settings
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                                Earnings
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                                Sign out
-                            </a>
-                        </li>
+                     {
+                            articles.map((article, index) => (
+                                <li key={article.id}>
+                                  
+                                    <Link
+                                        className={`block px-5 py-3 transition duration-150 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-600 ${selectedIndex === index ? "bg-gray-100 dark:bg-gray-600" : ""
+                                            }`}
+                                        to={`/catalyst/free-articles/${article.id}`}
+                                        onClick={() => handleSelectedArticle(index)}
+                                    >
+                                        {article.title}
+                                        
+                                    </Link>
+                                 
+
+                                </li>
+                            ))
+                     }
                     </ul>
                 </div>
             )}
