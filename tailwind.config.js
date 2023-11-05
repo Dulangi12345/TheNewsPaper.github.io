@@ -5,7 +5,19 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      'serif': ['PT Serif', 'serif'],
+    },
+
+    extend: {
+      width:{
+        '500' : '500px',
+      },
+      height:{
+        '500' : '500px',
+        '800' : '800px',
+      },
+    },
   },
   plugins: [],
 }

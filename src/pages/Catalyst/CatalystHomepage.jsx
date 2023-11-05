@@ -27,8 +27,7 @@ const CatalystHomepage = () => {
         fetchArticleData();
     }, []); 
 
-
-
+    
     return (
         <div className='mx-32 mt-10'>
             {Loading == false ? (

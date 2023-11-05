@@ -16,6 +16,13 @@ import KaguraHomepage from './pages/Kagura/KaguraHomepage';
 import CTTHomepage from './pages/CTT/CTTHomepage';
 import ManageHomepage from './admin/Catalyst/ManageHomepage';
 import CatalystHomepagePreview from './admin/Catalyst/CatalystHomepagePreview';
+import AddFreeArticles from './admin/Catalyst/AddFreeArticles';
+import FreeArticle from './pages/Catalyst/FreeArticle';
+import FreeArticlePreview from './admin/Catalyst/FreeArticlePreview';
+import AddAnimeCorner from './admin/Catalyst/AddAnimeCorner';
+import AnimeCornerPreview from './admin/Catalyst/AnimeCornerPreview';
+import Quiz from './admin/Catalyst/Quiz';
+
 
 import ProtectedRoute from './pages/auth/ProtectedRoute';
 import UnauthorizedPage from './pages/auth/UnauthorizedPage';
@@ -30,14 +37,14 @@ const AppRoutes = () => {
 
 
             {/* Public Routes */}
-            <Route path="/" element={<Homepage />} />
+
             <Route path="*" element={<Navigate to="/" />} />
 
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
             <Route path="/catalyst/homepage" element={<CatalystHomepage />} />
-
+            <Route path="/catalyst/free-articles/:articleId" element={<FreeArticle />} />
 
 
             {/* Catalyst Pages - Protected Routes (only accessible by logged in User) */}
@@ -64,6 +71,11 @@ const AppRoutes = () => {
             <Route
                 path="/catalyst/anime-corner"
                 element={<ProtectedRoute requiredRole="user" fallbackPath="/login" element={<AnimeCorner />} />}
+            />       
+            
+            <Route 
+                path="/admin/catalyst/quiz"
+                element={<ProtectedRoute requiredRole="user" fallbackPath="/login" element={<Quiz />} />}
             />
             <Route
                 path="/catalyst/other-extras"
@@ -100,7 +112,23 @@ const AppRoutes = () => {
                 path="/admin/catalyst/manage-articles"
                 element={<ProtectedRoute requiredRole="admin" fallbackPath="/unauthorized" element={<ManageArticles />} />}
             />
+            <Route
+                path="/catalyst/addFreeArticles"
+                element={<ProtectedRoute requiredRole="admin" fallbackPath="/unauthorized" element={<AddFreeArticles />} />}
+             />
+            <Route 
+                path="/admin/Catalyst/FreeArticlePreview"
+                element={<ProtectedRoute requiredRole="admin" fallbackPath="/unauthorized" element={<FreeArticlePreview />} />}
+            />
+            <Route 
+                path="/catalyst/addAnimeCorner" 
+                element={<ProtectedRoute requiredRole="admin" fallbackPath="/unauthorized" element={<AddAnimeCorner />} />}
+            />
 
+            <Route 
+                path="/admin/catalyst/animeCornerPreview" 
+                element={<ProtectedRoute requiredRole="admin" fallbackPath="/unauthorized" element={<AnimeCornerPreview />} />}
+            />
         </Routes>
     );
 }
