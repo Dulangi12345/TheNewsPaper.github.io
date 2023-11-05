@@ -5,25 +5,5 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [
     react(),
-    workbox({
-      globDirectory: 'build',
-      globPatterns: ['**/*.{js,css,html,png}'],
-      swDest: 'build/sw.js',
-      skipWaiting: true,
-      clientsClaim: true,
-      runtimeCaching: [
-        {
-          urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
-          handler: 'CacheFirst',
-          options: {
-            cacheName: 'images',
-            expiration: {
-              maxEntries: 10,
-            },
-          },
-        },
-      ],
-    }),
-  
   ],
 })
