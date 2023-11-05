@@ -17,7 +17,7 @@ const CatalystHomepage = () => {
                 const docSnap = await getDoc(docReference);
                 if (docSnap.exists()) {
                     setTitle(docSnap.data().title);
-                    setArticleContent(docSnap.data().articleContent);
+                    setArticleContent(docSnap.data().articleDescription);
                     setArticleImage(docSnap.data().articleImage);
 
                 } else {
@@ -30,7 +30,7 @@ const CatalystHomepage = () => {
         fetchTitleAndContent();
     }, []); 
 
-    const paragraphs = articleContent.split('\n\n');
+    const paragraphs = articleContent.split('\n');
 
 
 

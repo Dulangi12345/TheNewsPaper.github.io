@@ -4,7 +4,7 @@ import { ChromePicker } from 'react-color';
 import { useRef } from 'react';
 import { storage } from '../../firebase';
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
-import { collection, updateDoc, setDoc, getDocs, deleteDoc, getDoc ,orderBy ,query } from 'firebase/firestore/lite';
+import { collection, updateDoc, setDoc, getDocs, deleteDoc, getDoc, orderBy, query } from 'firebase/firestore/lite';
 import { doc } from 'firebase/firestore/lite';
 import { getFirestore } from 'firebase/firestore/lite';
 import { useNavigate } from 'react-router-dom';
@@ -19,7 +19,7 @@ const AddAnimeCorner = () => {
     const [existingImageUrl, setExistingImageUrl] = useState('');
     const [animeContent, setAnimeContent] = useState('');
     const [animeColor, setAnimeColor] = useState('');
-    const [ animeOrder , setAnimeOrder ] = useState('');
+    const [animeOrder, setAnimeOrder] = useState('');
     const [background, setBackground] = useState('#fff');
     const [isFormVisible, setIsFormVisible] = useState(false);
     // const [isUpdateButtonVisible, setIsUpdateButtonVisible] = useState(false);
@@ -27,14 +27,15 @@ const AddAnimeCorner = () => {
     const [selectedAnime, setSelectedAnime] = useState(null);
     const [draggedItem, setDraggedItem] = useState(null);
     const [animeList, setAnimeList] = useState(animes);
-     const [updatedAnimeList, setUpdatedAnimeList] = useState(animes);
+    const [updatedAnimeList, setUpdatedAnimeList] = useState(animes);
+
 
     const AnimeIndexRef = useRef(1);
     const db = getFirestore();
     const navigate = useNavigate();
-    
 
-    
+
+
     // const handleDragStart = (e, index) => {
     //     setDraggedItem(animeList[index]);
     //     e.dataTransfer.effectAllowed = 'move';
@@ -58,13 +59,13 @@ const AddAnimeCorner = () => {
     //     items.splice(index, 0, draggedItem);
     //     setAnimeList(items);
     //     console.log(items);
-    
-        
+
+
     // };
 
     // const handleDragLeave = () => {
     //     // Implement visual feedback if needed (e.g., changing the background color)
-        
+
     // };
 
     // const handleDrop = (e, index) => {
@@ -72,32 +73,32 @@ const AddAnimeCorner = () => {
     //     const updatedAnimeList = [...animeList];
 
     //     const draggedOverItem = updatedAnimeList[index];
-    
+
     //     const draggedItemIndex = updatedAnimeList.findIndex(item => item.animeIndex === draggedItem.animeIndex);
     //     const draggedOverItemIndex = updatedAnimeList.findIndex(item => item.animeIndex === draggedOverItem.animeIndex);
-    
+
     //     const temp = updatedAnimeList[draggedItemIndex];
     //     updatedAnimeList[draggedItemIndex] = updatedAnimeList[draggedOverItemIndex];
     //     updatedAnimeList[draggedOverItemIndex] = temp;
-    
+
     //     setAnimeList(updatedAnimeList);
-    
+
     //     const updatedItems = updatedAnimeList.map((item, index) => {
     //         return { ...item, animeOrder: index + 1 };
     //     });
-    
+
     //     const promises = updatedItems.map(item => {
     //         const docRef = doc(collection(db, 'AnimeCorner'), `Anime${item.animeIndex}`);
     //         return updateDoc(docRef, { animeOrder: item.animeOrder });
     //     });
-    
+
     //     Promise.all(promises).then(() => {
     //         console.log('Anime order successfully updated in the database.');
     //     }).catch(error => {
     //         console.error('Error updating anime order in the database:', error);
     //     });
     // };
-    
+
 
 
 
@@ -128,8 +129,8 @@ const AddAnimeCorner = () => {
         items.splice(index, 0, draggedItem);
         setAnimes(items);
         console.log(items);
-    
-        
+
+
     };
 
     const handleDragLeave = () => {
@@ -137,7 +138,7 @@ const AddAnimeCorner = () => {
 
 
 
-        
+
     };
 
     const handleDrop = (e, index) => {
@@ -146,37 +147,37 @@ const AddAnimeCorner = () => {
         const updatedAnimeList = [...animes];
 
         const draggedOverItem = updatedAnimeList[index];
-    
+
         const draggedItemIndex = updatedAnimeList.findIndex(item => item.animeIndex === draggedItem.animeIndex);
         const draggedOverItemIndex = updatedAnimeList.findIndex(item => item.animeIndex === draggedOverItem.animeIndex);
-    
+
         const temp = updatedAnimeList[draggedItemIndex];
         updatedAnimeList[draggedItemIndex] = updatedAnimeList[draggedOverItemIndex];
         updatedAnimeList[draggedOverItemIndex] = temp;
-    
+
         setAnimes(updatedAnimeList);
-    
+
         const updatedItems = updatedAnimeList.map((item, index) => {
             return { ...item, animeOrder: index + 1 };
         });
-    
+
         const promises = updatedItems.map(item => {
             const docRef = doc(collection(db, 'AnimeCorner'), `Anime${item.animeIndex}`);
             return updateDoc(docRef, { animeOrder: item.animeOrder });
         });
-    
+
         Promise.all(promises).then(() => {
             console.log('Anime order successfully updated in the database.');
         }).catch(error => {
             console.error('Error updating anime order in the database:', error);
         });
     };
-    
 
-   
-   
-    
-    
+
+
+
+
+
 
     const fetchAnimes = async () => {
         try {
@@ -203,7 +204,7 @@ const AddAnimeCorner = () => {
     };
 
 
-    
+
     const handlePreviewClick = () => {
         navigate('/admin/catalyst/animeCornerPreview', {
             state: {
@@ -347,7 +348,7 @@ const AddAnimeCorner = () => {
             }
 
 
-            setIsFormVisible(false);
+            // setIsFormVisible(false);
             fetchAnimes();
 
 
@@ -434,7 +435,7 @@ const AddAnimeCorner = () => {
                 await deleteObject(existingImageRef);
                 console.log('Image deleted successfully.');
             }
-            
+
             await deleteDoc(docReference);
             console.log('Anime  deleted successfully.');
             fetchAnimes();
@@ -469,7 +470,7 @@ const AddAnimeCorner = () => {
         }
     };
 
-
+   
 
     return (
 
@@ -478,10 +479,12 @@ const AddAnimeCorner = () => {
         <div >
 
 
-            <div>
+            {/* <div>
             <button onClick={() => setAnimeList(animeList)}>Update Anime List</button>
-            </div>
-            <div
+            </div> */}
+
+            {/* check what it looks like */}
+            {/* <div
                 className=''
                 style={{ height: '50vh', width: '100vw', background: background }}>
 
@@ -494,10 +497,10 @@ const AddAnimeCorner = () => {
                     {animeContent}
                 </p>
 
-            </div>
+            </div> */}
 
             <div>
-                <button onClick={toggleFormVisibility}>
+                <button onClick={toggleFormVisibility} className='bg-none pt-4  pl-6 pb-4 pr-6 w-44 m-8 rounded-full border-black border-2  '>
                     {isFormVisible ? ' Cancel' : 'Add An Anime'}
 
                 </button>
@@ -506,105 +509,180 @@ const AddAnimeCorner = () => {
 
             {isFormVisible && (
 
-                <div>
+                <form action="" className='relative z-10'>
+                    <div className='space-y-12  w-2/3 m-8 p-8 border-gray-900/10 border-2 rounded fixed inset-0 bg-white  transition-opacity overflow-scroll '>
+                        <div className='border-b border-gray-900/10 pb-12'>
 
-                    <div>
-                        <label htmlFor="animeIndex">Anime Index</label>
-                        <input type="number" min={1} className="form-control border-2 border-gray-500"
-                            id="animeIndex" placeholder="Enter Anime Index"
-                            value={
-                                animeIndex
-                            }
-                            onChange={handleAnimeIndexChange}
-                        />
+                            <h2 class="text-base font-semibold leading-7 text-gray-900">Please fill in the details</h2>
+
+                            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+
+
+
+                                <div class="sm:col-span-4">
+                                    <label htmlFor="animeIndex" className='block text-sm font-medium leading-6 text-gray-900'>Anime Index</label>
+                                    <div class="mt-2">
+                                        <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                            <input type="number" min={1} className=" block flex-1 border-0 bg-transparent py-1.5 pl-2 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                                id="animeIndex" placeholder="Enter Anime Index"
+                                                value={
+                                                    animeIndex
+                                                }
+                                                onChange={handleAnimeIndexChange}
+                                            />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="sm:col-span-4">
+                                    <label htmlFor="animeName" className='block text-sm font-medium leading-6 text-gray-900'>Anime Name</label>
+
+                                    <div class="mt-2">
+                                        <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                            <input type="text" className="block flex-1 border-0 bg-transparent py-1.5 pl-2 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                                id="animeName" placeholder="Enter Anime Name"
+                                                value={animeName}
+                                                onChange={handleAnimeNameChange} />
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-span-full">
+                                    <label htmlFor="animeContent" className="block text-sm font-medium leading-6 text-gray-900">Anime Content</label>
+                                    <div class="mt-2">
+                                        <textarea
+                                            className="block w-full rounded-md border-0 py-1.5 pl-2  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            id="animeContent"
+                                            placeholder="Enter Anime Content"
+                                            value={animeContent}
+                                            onChange={handleAnimeContentChange} > </textarea>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-span-full">
+                                    <img src={existingImageUrl} alt="" className='w-20' />
+                                    <label htmlFor="animeImage" className='block text-sm font-medium leading-6 text-gray-900'>Anime Image
+
+                                        <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                                            <div class="text-center">
+                                                <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                    <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+                                                </svg>
+                                                <div class="mt-4 flex text-sm leading-6 text-gray-600">
+                                                    <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                                                        Upload a file
+                                                        <input type="file"
+                                                            style={{ display: 'none' }}
+
+                                                            id="animeImage" placeholder="Enter Anime Image"
+
+                                                            onChange={handleAnimeImageChange}
+                                                            className='sr-only'
+                                                        />
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </label>
+
+
+                                    <ProgressBar progress={progress} />
+
+
+                                </div>
+
+                                <ChromePicker
+                                    color={background}
+                                    onChangeComplete={handleColorChange}
+                                    // onChangeComplete={(color) => setBackground(color.hex)}
+                                    draggable={true}
+                                />
+
+
+                                {existingImageUrl && (
+                                    <button onClick={() => removeImage(
+                                        animeIndex,
+                                        animeImage
+                                    )}>Remove Image</button>
+                                )}
+
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="mt-6 flex items-center justify-end gap-x-6">
+                            <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={
+                                () => {
+                                    isFormVisible = false
+                                }
+                            }>Cancel</button>
+
+                            <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={addAnime}>Save</button>
+
+                        </div>
+
+
                     </div>
 
+                </form>
 
-                    <div>
-                        <label htmlFor="animeName">Anime Name</label>
-                        <input type="text" className="form-control border-2 border-gray-500"
-                            id="animeName" placeholder="Enter Anime Name"
-                            value={animeName}
-                            onChange={handleAnimeNameChange} />
-                    </div>
+            )}
+
+            <div class=" mx-auto bg-white rounded-xl m-5 ">
 
 
-                    <div>
-                        <label htmlFor="animeContent">Anime Content</label>
-                        <textarea
-                            className="form-control border-2 border-gray-500"
-                            id="animeContent"
-                            placeholder="Enter Anime Content"
-                            value={animeContent}
-                            onChange={handleAnimeContentChange} > </textarea>
-                    </div>
-
-
-                    <div >
-                        <img src={existingImageUrl} alt="" className='w-20' />
-                        <label htmlFor="animeImage">Anime Image
-                            <input type="file"
-                                style={{ display: 'none' }}
-
-                                id="animeImage" placeholder="Enter Anime Image"
-
-                                onChange={handleAnimeImageChange} />
-                        </label>
-                        <ProgressBar progress={progress} />
-
-
-                    </div>
-
-                    <ChromePicker
-                        color={background}
-                        onChangeComplete={handleColorChange}
-                        // onChangeComplete={(color) => setBackground(color.hex)}
-                        draggable={true}
-                    />
-
-
-                    {existingImageUrl && (
-                        <button onClick={() => removeImage(
-                            animeIndex,
-                            animeImage
-                        )}>Remove Image</button>
-                    )}
-
-                    <button className="btn btn-primary" onClick={addAnime}>Save</button>
-
-                </div>
-            ) }
-
-            <div>
 
                 {animes.map((anime, index) => {
                     return (
 
 
-                        <div key={anime.animeIndex} 
-                        draggable={true}
-                        onDragStart={(e) => handleDragStart(e, index)}
-                        onDragOver={(e) => handleDragOver(e, index)}
-                        onDragEnter={(e) => handleDragEnter(e, index)}
-                        onDragLeave={handleDragLeave}
-                        onDrop={(e) => handleDrop(e, index)}
-                        className='border-2 m-8 p-4  h-56 w-full'
+                        <div key={anime.animeIndex}
+                            draggable={true}
+                            onDragStart={(e) => handleDragStart(e, index)}
+                            onDragOver={(e) => handleDragOver(e, index)}
+                            onDragEnter={(e) => handleDragEnter(e, index)}
+                            onDragLeave={handleDragLeave}
+                            onDrop={(e) => handleDrop(e, index)}
+                            className='border-2 m-8 p-4  rounded-xl flex lg:flex-row flex-col h-66 gap-4  ' 
                             style={
                                 { background: anime.animeColor }
 
                             }>
-                            <img src={anime.animeImage} alt=""  className='h-6 '/>
-                            <h1>{anime.animeName}</h1>
-                            <p>{anime.animeContent}</p>
-                            <p>{anime.animeColor}</p>
-                            <button onClick={
+
+                            <div className='w-full '>
+                            <img src={anime.animeImage} alt="" className='object-cover h-48 w-full ' />
+
+                            </div>
+
+                            <div className='' >
+                            <h1 className='w-full font-bold mx-auto text-lg '>{anime.animeName}</h1>
+                            <p className='w-full mx-auto text-md '>{anime.animeContent}</p>
+
+                            <div className='flex flex-row '>
+                            <p className='p-2 border-2 border-black rounded-full w-32 m-2 text-center '>{anime.animeColor}</p>
+
+                            <button 
+                            className='p-2  rounded-full w-32 uppercase m-2 bg-green-400 '
+                            onClick={
                                 () => {
                                     editAnime(AnimeIndexRef.current = anime.animeIndex)
                                 }
-                            }>Edit Anime
+                            }>Edit 
                             </button>
 
-                            <button className='flex'
+                            <button className='p-2  rounded-full w-32 uppercase m-2 bg-red-600'
                                 onClick={
                                     () => {
                                         deleteAnime(AnimeIndexRef.current = anime.animeIndex)
@@ -613,8 +691,15 @@ const AddAnimeCorner = () => {
                                 }
 
                             >
-                                delete Anime
+                                delete 
                             </button>
+
+                            </div>
+
+                       
+                            </div>
+                        
+                          
 
                         </div>
                     )
