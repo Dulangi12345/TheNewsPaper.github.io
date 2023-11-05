@@ -53,19 +53,6 @@ const NavigationLayout = () => {
                         <div>
                             <DropdownMenu />
                         </div>
-                        <div>
-                            <Link to="/catalyst/add-homepage">Add Catalyst Hompage</Link>
-                        </div>
-                        <div>
-                            <Link to="/catalyst/addAnimeCorner">Manage Anime Corner</Link>
-                        </div>
-                       
-                        <div>
-                            <Link to="/catalyst/addFreeArticles">Manage Free articles</Link>
-                        </div>
-                        <div>
-                            <Link to="admin/catalyst/quiz">Add Quiz</Link>
-                        </div>
                         <div className=' w-16 text-center'>
                             <Link to="/catalyst/current-events">Current Events</Link>
                         </div>

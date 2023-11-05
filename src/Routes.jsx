@@ -73,10 +73,6 @@ const AppRoutes = () => {
                 element={<ProtectedRoute requiredRole="user" fallbackPath="/login" element={<AnimeCorner />} />}
             />       
             
-            <Route 
-                path="/admin/catalyst/quiz"
-                element={<ProtectedRoute requiredRole="user" fallbackPath="/login" element={<Quiz />} />}
-            />
             <Route
                 path="/catalyst/other-extras"
                 element={<ProtectedRoute requiredRole="user" fallbackPath="/login" element={<OtherExtras />} />}
@@ -113,7 +109,7 @@ const AppRoutes = () => {
                 element={<ProtectedRoute requiredRole="admin" fallbackPath="/unauthorized" element={<ManageArticles />} />}
             />
             <Route
-                path="/catalyst/addFreeArticles"
+                path="/admin/catalyst/addFreeArticles"
                 element={<ProtectedRoute requiredRole="admin" fallbackPath="/unauthorized" element={<AddFreeArticles />} />}
              />
             <Route 
@@ -121,13 +117,16 @@ const AppRoutes = () => {
                 element={<ProtectedRoute requiredRole="admin" fallbackPath="/unauthorized" element={<FreeArticlePreview />} />}
             />
             <Route 
-                path="/catalyst/addAnimeCorner" 
+                path="/admin/catalyst/addAnimeCorner" 
                 element={<ProtectedRoute requiredRole="admin" fallbackPath="/unauthorized" element={<AddAnimeCorner />} />}
             />
-
             <Route 
                 path="/admin/catalyst/animeCornerPreview" 
                 element={<ProtectedRoute requiredRole="admin" fallbackPath="/unauthorized" element={<AnimeCornerPreview />} />}
+            />
+            <Route 
+                path="/admin/catalyst/quiz"
+                element={<ProtectedRoute requiredRole="admin" fallbackPath="/unauthorized" element={<Quiz />} />}
             />
         </Routes>
     );
