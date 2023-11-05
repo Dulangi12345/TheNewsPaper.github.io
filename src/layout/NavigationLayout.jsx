@@ -1,65 +1,50 @@
 import { set } from 'mongoose';
-import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import DropdownMenu from './dropdown';
+import { AuthContext } from '../pages/auth/AuthProvider';
 
 const NavigationLayout = () => {
-    const [showCatalystLinks, setShowCatalystLinks] = useState(false);
-    const [showKaguraLinks, setShowKaguraLinks] = useState(false);
-    const [showCTTLiveLinks, setShowCTTLiveLinks] = useState(false);
-    const [disappearOtherLinks, setDisappearOtherLinks] = useState(true);
-    const navigate = useNavigate();
+    const { isLoggedIn, logout } = useContext(AuthContext);
 
-    const handleLinkClick = (linkName) => {
-        if (linkName === 'Catalyst') {
-            setShowCatalystLinks(true);
-            setShowKaguraLinks(false);
-            setShowCTTLiveLinks(false);
-            setDisappearOtherLinks(false);
-            navigate('/catalyst/homepage');
-        } else if (linkName === 'Kagura') {
-            setShowKaguraLinks(true);
-            setShowCatalystLinks(false);
-            setShowCTTLiveLinks(false);
-            setDisappearOtherLinks(false);
-            navigate('/kagura/homepage');
-        } else if (linkName === 'CTTLive') {
-            setShowCTTLiveLinks(true);
-            setShowCatalystLinks(false);
-            setShowKaguraLinks(false);
-            setDisappearOtherLinks(false);
-            navigate('/CTTLive/homepage');
-        }
-        else {
-            setShowCatalystLinks(false);
-            setShowKaguraLinks(false);
-            setShowCTTLiveLinks(false);
-            setDisappearOtherLinks(true);
-        }
-    };
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    //Home Path name
+    const isHomepage = location.pathname === '/';  
+
 
     return (
         <div>
-            <nav className="flex flex-col items-end mr-12 mt-6">
-                {disappearOtherLinks && (
-                    <div className="flex space-x-12">
-                        <div  className="">
-                            <Link className='' to="/">Home</Link>
+            <nav className="flex flex-col items-end mr-12">
+                {isHomepage && (
+                    <div className="flex space-x-12 mt-6">
+                        <div className="">
+                            <Link to="/">Home</Link>
                         </div>
-                        <div className=' cursor-pointer' onClick={() => handleLinkClick('Catalyst')}>
-                            <span className='text-blue-500'>Catalyst</span>
+                        <div>
+                            <Link to="/catalyst/homepage">Catalyst</Link>
                         </div>
-                        <div className=' cursor-pointer' onClick={() => handleLinkClick('Kagura')}>
-                            <span className='text-blue-500'>Kagura</span>
+                        <div >
+                            <Link to="/kagura/homepage">Kagura</Link>
                         </div>
-                        <div className=' cursor-pointer' onClick={() => handleLinkClick('CTTLive')}>
-                            <span className='text-blue-500'>CTT Live</span>
+                        <div >
+                            <Link to="/CTTLive/homepage">CTT Live</Link>
                         </div>
+                        {isLoggedIn ? (
+                            <div className='cursor-pointer' onClick={() => { logout(); navigate('/'); }}>
+                                <span>Logout</span>
+                            </div>
+                        ) : (
+                            <div className='cursor-pointer'>
+                                <Link to="/login">Login</Link>
+                            </div>
+                        )}
                     </div>
                 )}
-                {showCatalystLinks && (
-                    <div className="flex space-x-8">
-                        <div className=" cursor-pointer" onClick={() => { setShowCatalystLinks(false); setDisappearOtherLinks(true); }}>
+                {location.pathname.includes('/catalyst') && !location.pathname.includes('admin') && (
+                    <div className="flex space-x-8 mt-6">
+                        <div >
                             <Link to="/">Home</Link>
                         </div>
                         <div className=' w-16 text-center'>
@@ -105,49 +90,54 @@ const NavigationLayout = () => {
                         <div className='w-16 text-center'>
                             <Link to="/catalyst/other-extras">Other Extras</Link>
                         </div>
-                        <div onClick={() => { setShowKaguraLinks(true); setDisappearOtherLinks(false); setShowCatalystLinks(false); setShowCTTLiveLinks(false) }}>
+                        <div>
                             <Link to="/kagura/homepage">Kagura</Link>
                         </div>
-                        <div onClick={() => { setShowCTTLiveLinks(true); setDisappearOtherLinks(false); setShowCatalystLinks(false); setShowKaguraLinks(false) }}>
+                        <div>
                             <Link to="/CTTLive/homepage">CTT Live</Link>
                         </div>
                     </div>
-                )}
-                {showKaguraLinks && (
-                    <div className="flex space-x-8">
-                        <div onClick={() => { setShowKaguraLinks(false); setDisappearOtherLinks(true); }}>
-                            <Link to="/">Home</Link>
+                )
+                }
+                {
+                    location.pathname.includes('/kagura') && !location.pathname.includes('admin') && (
+                        <div className="flex space-x-8 mt-6">
+                            <div>
+                                <Link to="/">Home</Link>
+                            </div>
+                            <div>
+                                <Link to="/kagura/homepage">Kagura Homepage</Link>
+                            </div>
+                            <div>
+                                <Link to="/catalyst/homepage">Catalyst</Link>
+                            </div>
+                            <div>
+                                <Link to="/CTTLive/homepage">CTT Live</Link>
+                            </div>
+
                         </div>
-                        <div>
-                            <Link to="/kagura/homepage">Kagura Homepage</Link>
+                    )
+                }
+                {
+                    location.pathname.includes('/CTTLive') && !location.pathname.includes('admin') && (
+                        <div className='flex space-x-8 mt-6'>
+                            <div>
+                                <Link to="/">Home</Link>
+                            </div>
+                            <div>
+                                <Link to="/CTTLive/homepage">CTT Live Homepage</Link>
+                            </div>
+                            <div>
+                                <Link to="/catalyst/homepage">Catalyst</Link>
+                            </div>
+                            <div>
+                                <Link to="/kagura/homepage">Kagura</Link>
+                            </div>
                         </div>
-                        <div onClick={() => { setShowCatalystLinks(true); setDisappearOtherLinks(false); setShowKaguraLinks(false) }}>
-                            <Link to="/catalyst/homepage">Catalyst</Link>
-                        </div>
-                        <div onClick={() => { setShowCTTLiveLinks(true); setDisappearOtherLinks(false); setShowKaguraLinks(false) }}>
-                            <Link to="/CTTLive/homepage">CTT Live</Link>
-                        </div>
-                        
-                    </div>
-                )}
-                {showCTTLiveLinks && (
-                    <div className='flex space-x-8'>
-                        <div onClick={() => { setShowCTTLiveLinks(false); setDisappearOtherLinks(true); }}>
-                            <Link to="/">Home</Link>
-                        </div>
-                        <div>
-                            <Link to="/CTTLive/homepage">CTT Live Homepage</Link>
-                        </div>
-                        <div onClick={() => { setShowCatalystLinks(true); setDisappearOtherLinks(false); setShowCTTLiveLinks(false) }}>
-                            <Link to="/catalyst/homepage">Catalyst</Link>
-                        </div>
-                        <div onClick={() => { setShowKaguraLinks(true); setDisappearOtherLinks(false); setShowCTTLiveLinks(false) }}>
-                            <Link to="/kagura/homepage">Kagura</Link>
-                        </div>
-                    </div>
-                )}
-            </nav>
-        </div>
+                    )
+                }
+            </nav >
+        </div >
     );
 }
 
