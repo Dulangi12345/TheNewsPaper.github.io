@@ -13,7 +13,8 @@ const PlayQuiz = () => {
     const [correctAnswerIndices, setCorrectAnswerIndices] = useState([]);
     const [questionCount, setQuestionCount] = useState(0);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [quizId, setQuizId] = useState([]);
+    const [quizName, setQuizName] = useState('');
+    const  [ correctAnswerText , setCorrectAnswerText ] = useState([]);
 
 
 
@@ -23,7 +24,7 @@ const PlayQuiz = () => {
             const Docs = await getDocs(collectionRef);
             const quizNames = Docs.docs.map(doc => doc.data().title);
             setQuizNames(quizNames);
-            console.log('quiz names ', quizNames);
+            // console.log('quiz names ', quizNames);
         } catch (error) {
             console.log('error fetching quiz names ', error);
         }
@@ -36,9 +37,12 @@ const PlayQuiz = () => {
             const quizData = querySnapshot.docs.find(doc => doc.data().title === quizName)?.data();
             if (quizData) {
                 setQuizQuestions(quizData.questions);
-                setCorrectAnswerIndices(quizData.questions.map(question => question.correctAnswerIndex));
+                // setCorrectAnswerIndices(quizData.questions.map(question => question.correctAnswerIndex));
+                setCorrectAnswerIndices(quizQuestions.map(question => question.
+                    answers[question.correctAnswerIndex]));
+                    console.log('correct answer indices ', correctAnswerIndices);
                 setQuestionCount(quizData.questions.length);
-                console.log('Fetched quiz questions:', quizData.questions);
+                setQuizName(quizName);
             }
         } catch (error) {
             console.log('Error fetching quiz:', error);
@@ -47,30 +51,33 @@ const PlayQuiz = () => {
 
 
 
-    const CheckIfCorrect = async (selectedAnswer , quizName) => {
-
+    const CheckIfCorrect = async ({ answer, questionIndex, quizName }) => {
+        console.log('answer ', answer);
         try {
             const collectionRef = collection(db, 'Quiz');
             const querySnapshot = await getDocs(collectionRef);
             const quizData = querySnapshot.docs.find(doc => doc.data().title === quizName)?.data();
             if (quizData) {
                 setQuizQuestions(quizData.questions);
-                setCorrectAnswerIndices(quizData.questions.map(question => question.correctAnswerIndex));
+                
                 setQuestionCount(quizData.questions.length);
-                console.log('Fetched quiz questions:', quizData.questions);
+                setQuizName(quizName);
             }
         } catch (error) {
             console.log('Error fetching quiz:', error);
         }
-
-        if (selectedAnswer.index === correctAnswerIndices.correctAnswerIndices) {
-            console.log('correct answer');
+        const isCorrect = correctAnswerIndices[questionIndex] === answer;
+        if (isCorrect) {
             Score();
             handleNextQuestion();
-        } else {
+            console.log('correct answer');
+        }else{
             console.log('wrong answer');
+            handleNextQuestion();
         }
+        setIsAnswerSubmitted(true);
     };
+
 
     const handleNextQuestion = () => {
         setSelectedAnswer(null);
@@ -84,6 +91,11 @@ const PlayQuiz = () => {
         setCurrentQuestionIndex(0);
         setScore(0);
     };
+
+    const skipQuestion = () => {    
+        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    };
+
 
 
     const Score = () => {
@@ -103,43 +115,88 @@ const PlayQuiz = () => {
     };
 
 
-
+    const fetchData = async () => {
+        try {
+            const collectionRef = collection(db, 'Quiz');
+            const Docs = await getDocs(collectionRef);
+            const quizData = Docs.docs.find(doc => doc.data().title === quizName)?.data();
+            if (quizData) {
+                setQuizQuestions(quizData.questions);
+                setCorrectAnswerIndices(quizData.questions.map(question => question.answers[question.correctAnswerIndex]));
+                setQuestionCount(quizData.questions.length);
+                setQuizName(quizName);
+                console.log('Fetched quiz questions:', quizData.questions, correctAnswerIndices);
+            }
+        } catch (error) {
+            console.log('Error fetching quiz:', error);
+        }
+    };
 
 
     useEffect(() => {
-        setCorrectAnswerIndices(quizQuestions.map(question => question.correctAnswerIndex));
         FetchQuizName();
-    }, []);
+      
+
+        if (quizName) {
+            fetchData();
+        }
+    }, [quizName]);
+
+    // useEffect(() => {
+       
+    //     console.log(correctAnswerIndices);
+    //     FetchQuizName();
+    // }, [correctAnswerIndices]);
 
     return (
-        <div>
-            <h1>Play Quiz</h1>
+        <div className="flex flex-row ">
+        
 
 
-            <div>
-                <h1>Quizzes</h1>
+            <div className="" id='quiz-section'>
+                <h1 className="font-bold text-3xl" > Put your knowledge to the test</h1>
+                <p className="text-2xl m-2 ">Are you the number one anime fan ?!</p>
                 {quizNames.map((quizName, index) => (
-                    <div key={index}>
-                        <button onClick={() => fetchTheQuiz(quizName)}
-                            className="border-2  text-black p-4 "
+                    <div key={index}
+                    >
+                        <ul id="quiz-names-list">
+                            <li>
+                            <button onClick={() => fetchTheQuiz(quizName)}
+                        id="quiz-name"
+                        className="rounded-full w-44  h-16  flex justify-center items-center m-4 bg-black" 
+
                         >{quizName}</button>
+                            </li>
+                        </ul>
+                     
                     </div>
                 ))}
 
             </div>
-            <div>
+            <div id="quiz-Content" className="w-full m-auto">
                 {quizQuestions.length > 0 && currentQuestionIndex < quizQuestions.length && (
                     <div key={currentQuestionIndex}>
                         <h1>{quizQuestions[currentQuestionIndex].question}</h1>
                         <div>
                             {quizQuestions[currentQuestionIndex].answers.map((answer, answerIndex) => (
-                                <div key={answerIndex}>
-                                    <label>
+                                <div key={answerIndex} id="button-wrapper">
+                                    <label 
+                                     id="custom-checkbox-label "
+
+                                         >
                                         <input
-                                            type="radio"
+                                            type="checkbox"
                                             value={answer}
+                                           
+                                            className= ""
                                             checked={selectedAnswer === answer}
-                                            onChange={() => setSelectedAnswer(answer)}
+                                            onChange={() =>
+                                                
+                                                 {
+                                                    setSelectedAnswer(answer)
+                                                 }
+                                            }
+                                           
                                         />
                                         {answer}
                                     </label>
@@ -148,16 +205,22 @@ const PlayQuiz = () => {
                         </div>
 
                         <div>
-                            <button onClick={() => CheckIfCorrect(
+                            <button onClick={() => 
+                            {
+                            CheckIfCorrect(
                                 {
                                     answer: selectedAnswer,
                                     questionIndex: currentQuestionIndex,
-
-                                    quizName: quizNames[currentQuestionIndex]
+                                    quizName: quizName,
 
                                 }
+
                                
-                            )}>Submit</button>
+                            )}
+                            }
+                            
+                            >Submit</button>
+                            <button onClick={skipQuestion}>Skip</button>
                         </div>
                     </div>
                 )}
