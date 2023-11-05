@@ -1,53 +1,55 @@
-import React, { useEffect , useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { doc, collection, getDoc } from 'firebase/firestore/lite';
 import { db  } from '../../firebase';
-import { doc, collection ,  setDoc , getDoc  } from 'firebase/firestore/lite';
 
 
 const CatalystHomepage = () => {
+    const [articleData, setArticleData] = useState({ articleTitle: '', articleDescription: '', articleImage: '' });
+    const [Loading, setLoading] = useState(true);
 
-    const [title, setTitle] = useState('');
-    const [ articleContent , setArticleContent ] = useState('');
-    const [ articleImage , setArticleImage ] = useState(''); 
+    const fetchArticleData = async () => {
+        try {
+            const articleRef = doc(db, 'Catalyst', 'homepage');
+            const articleSnap = await getDoc(articleRef);
+            if (articleSnap.exists()) {
+                setArticleData(articleSnap.data());
+            }
+        } catch (error) {
+
+            console.error('Error fetching article data: ', error);
+            setError('Failed to fetch article data. Please try again later.');
+        } finally {
+            setLoading(false); 
+        }
+    };
 
     useEffect (() => {
-        const fetchTitleAndContent = async () => {
-            try {
-                const collectionReference = collection(db, 'Catalyst');
-                const docReference = doc(collectionReference, 'homepage');
-                const docSnap = await getDoc(docReference);
-                if (docSnap.exists()) {
-                    setTitle(docSnap.data().title);
-                    setArticleContent(docSnap.data().articleContent);
-                    setArticleImage(docSnap.data().articleImage);
-
-                } else {
-                    console.log('No such document');
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        fetchTitleAndContent();
+        fetchArticleData();
     }, []); 
-
-    const paragraphs = articleContent.split('\n\n');
 
 
 
     return (
-        <div>
-            <h1>Catalyst Homepage</h1>
-            <h2>{title}</h2>
-            <div className=' mb-10 mt-16'>
-                {paragraphs.map((paragraph, index) => {
-                    return <p key={index}>{paragraph}</p>
-                })}
+        <div className='mx-32 mt-10'>
+            {Loading == false ? (
+                <div className="flex flex-wrap">
+                    <div className="p-2">
+                        <div className="rounded-md p-4">
+                            <div className="flex justify-between">
+                                <h2 className="text-3xl mb-3">{articleData.articleTitle}</h2>
+                            </div>
+                            <img src={articleData.articleImage} alt="Homepage Image" className="w-full h-96 object-cover mt-4" />
+                            <p className="text-gray-700 mt-14" style={{ whiteSpace: 'pre-line' }}>{articleData.articleDescription}</p>
 
-            </div>
-            <div>
-                <img src={articleImage} alt="article image" />
-            </div>
+                        </div>
+                    </div>
 
+                </div>
+            ) : (
+                <div className="flex items-center justify-center">
+                    <p className='text-3xl'>Loading...</p>
+                </div>
+            )}
         </div>
     );
 };
