@@ -9,6 +9,7 @@ import ArtsAndCulture from './pages/Catalyst/ArtsAndCulture';
 import OtherExtras from './pages/Catalyst/OtherExtras';
 import ScienceAndTechnology from './pages/Catalyst/ScienceAndTechnology';
 import TravelAndLifestyle from './pages/Catalyst/TravelAndLifestyle';
+import FullArticle from './pages/Catalyst/FullArticle';
 import WellbeingCorner from './pages/Catalyst/WellbeingCorner';
 import AnimeCorner from './pages/Catalyst/AnimeCorner';
 import InhouseComic from './pages/Catalyst/InhouseComic';
@@ -39,7 +40,7 @@ const AppRoutes = () => {
             {/* Public Routes */}
 
             <Route path="*" element={<Navigate to="/" />} />
-
+            <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
@@ -63,6 +64,10 @@ const AppRoutes = () => {
             <Route
                 path="/catalyst/travel-and-lifestyle"
                 element={<ProtectedRoute requiredRole="user" fallbackPath="/login" element={<TravelAndLifestyle />} />}
+            />
+            <Route
+                path="/catalyst/:articlePage/:articleIndex"
+                element={<ProtectedRoute requiredRole="user" fallbackPath="/login" element={<FullArticle />} />}
             />
             <Route
                 path="/catalyst/wellbeing-corner"

@@ -126,11 +126,11 @@ const ManageHomepage = () => {
         // Update the document with the new article data
         const docReference = doc(db, 'Catalyst', 'homepage');
         const updatedData = {
-                articleTitle: 'Title',
-                articleDescription: 'This is the Article Description and by clicking on the edit button you can edit the article description and save it.',
-                articleImage: 'This is the image URL',
-                timestamp: serverTimestamp(),
-            
+            articleTitle: 'Title',
+            articleDescription: 'This is the Article Description and by clicking on the edit button you can edit the article description and save it.',
+            articleImage: 'This is the image URL',
+            timestamp: serverTimestamp(),
+
         };
 
         await updateDoc(docReference, updatedData);
@@ -233,12 +233,8 @@ const ManageHomepage = () => {
                                         {isSaving ? (
                                             <div className="flex items-center">
                                                 <span className="mr-2 text-white">Saving...</span>
-                                                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042.86 5.86 2.291 8.209l1.414-1.414zM12 20c-3.042 0-5.86-.86-8.209-2.291l-1.414 1.414A7.962 7.962 0 0012 24v-4zm8.209-2.291A7.962 7.962 0 0020 12h4c0 6.627-5.373 12-12 12v-4zm-2.291-8.209A7.962 7.962 0 0012 4V0c6.627 0 12 5.373 12 12h-4z"></path>
-                                                </svg>
+                                                <div className="animate-spin h-4 w-3.5 border-t-2 border-b-2 border-white rounded-full"></div>
                                             </div>
-
                                         ) : (
                                             'Save Article'
                                         )}
@@ -288,7 +284,7 @@ const ManageHomepage = () => {
                     </div>
                 </div>
             )}
-            
+
         </div>
     );
 }
