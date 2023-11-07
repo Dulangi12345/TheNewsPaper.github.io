@@ -4,7 +4,6 @@ import { db } from '../../firebase';
 import { collection, doc, query, updateDoc, where } from 'firebase/firestore/lite';
 import { addDoc, getDocs } from 'firebase/firestore/lite';
 import { useEffect } from 'react';
-import { set } from 'mongoose';
 
 
 
@@ -214,6 +213,17 @@ const Quiz = () => {
         setQuiz(quizzes)
 
     };
+
+    const deleteQuestion = async (e) => {
+
+
+    }
+
+
+    const deleteQuiz = async (e) => {
+
+
+    }
 
 
     useEffect(() => {

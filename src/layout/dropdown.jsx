@@ -60,11 +60,11 @@ const DropdownMenu = () => {
         <div className="relative">
             <button
                 id="dropdownDefaultButton"
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="text-black focus:outline-none  rounded-lg   py-2.5 text-center inline-flex items-center hover:underline block rounded-md px-3 py-2 text-base font-bold"
                 type="button"
                 onClick={toggleDropdown} // Toggle dropdown visibility on button click
             >
-                Dropdown button{" "}
+                Free Articles{" "}
                 <svg
                     className={`w-2.5 h-2.5 ml-2.5 transform transition-transform ${isOpen ? "rotate-180" : ""
                         }`}
@@ -88,7 +88,7 @@ const DropdownMenu = () => {
                     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                      {
                             articles.map((article, index) => (
-                                <li key={article.id}>
+                                <li key={article.id} className="hover:underline block rounded-md px-3 py-2 text-base font-bold">
                                   
                                     <Link
                                         className={`block px-5 py-3 transition duration-150 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-600 ${selectedIndex === index ? "bg-gray-100 dark:bg-gray-600" : ""

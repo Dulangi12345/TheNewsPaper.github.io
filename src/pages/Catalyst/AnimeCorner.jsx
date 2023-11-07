@@ -4,11 +4,14 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { db } from '../../firebase';
 import PlayQuiz from './../../admin/Catalyst/PlayQuiz';
+import Footer from '../../layout/footer'
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 
 const AnimeCorner = () => {
 
   const [anime, setAnime] = useState([]);
+  const [user, setUser] = useState('');
 
 
 
@@ -28,12 +31,21 @@ const AnimeCorner = () => {
 
     } catch (error) {
       console.log(error);
+    
+    
     }
   }
+
+  
+
+  
+
 
 
   useEffect(() => {
     fetchAnimes();
+
+    
   }
     , []);
 
@@ -56,7 +68,7 @@ const AnimeCorner = () => {
               >
 
                
-                <img src={anime.animeImage} alt="anime image" className='h-full w-auto ml-12 ' id='anime-image'/>
+                <img src={anime.animeImage} alt="anime image" className='object-cover' />
 
             
                 <div className='flex flex-col w-2/3'>
@@ -79,6 +91,8 @@ const AnimeCorner = () => {
         </div>
 
       </div>
+
+      <Footer/>
 
 
     </div>

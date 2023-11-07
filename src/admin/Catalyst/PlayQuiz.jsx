@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { collection, getDocs, doc, getDoc } from "firebase/firestore/lite";
-import { set } from "mongoose";
+import { style } from "@mui/system";
+import { getAuth } from "firebase/auth";
+
 
 const PlayQuiz = () => {
     const [quizNames, setQuizNames] = useState([]);
@@ -14,7 +16,10 @@ const PlayQuiz = () => {
     const [questionCount, setQuestionCount] = useState(0);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [quizName, setQuizName] = useState('');
-    const  [ correctAnswerText , setCorrectAnswerText ] = useState([]);
+    const [correctAnswerText, setCorrectAnswerText] = useState([]);
+    const [gameOver, setGameOver] = useState(false);
+
+    const auth = getAuth();
 
 
 
@@ -40,7 +45,7 @@ const PlayQuiz = () => {
                 // setCorrectAnswerIndices(quizData.questions.map(question => question.correctAnswerIndex));
                 setCorrectAnswerIndices(quizQuestions.map(question => question.
                     answers[question.correctAnswerIndex]));
-                    console.log('correct answer indices ', correctAnswerIndices);
+                // console.log('correct answer indices ', correctAnswerIndices);
                 setQuestionCount(quizData.questions.length);
                 setQuizName(quizName);
             }
@@ -59,7 +64,7 @@ const PlayQuiz = () => {
             const quizData = querySnapshot.docs.find(doc => doc.data().title === quizName)?.data();
             if (quizData) {
                 setQuizQuestions(quizData.questions);
-                
+
                 setQuestionCount(quizData.questions.length);
                 setQuizName(quizName);
             }
@@ -70,9 +75,9 @@ const PlayQuiz = () => {
         if (isCorrect) {
             Score();
             handleNextQuestion();
-            console.log('correct answer');
-        }else{
-            console.log('wrong answer');
+            // console.log('correct answer');
+        } else {
+            // console.log('wrong answer');
             handleNextQuestion();
         }
         setIsAnswerSubmitted(true);
@@ -83,6 +88,12 @@ const PlayQuiz = () => {
         setSelectedAnswer(null);
         setIsAnswerSubmitted(false);
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+        //check if game is over
+        if (currentQuestionIndex === questionCount - 1) {
+            // console.log('game over');
+            setGameOver(true);
+        }
+
     };
 
     const replayQuiz = () => {
@@ -90,9 +101,10 @@ const PlayQuiz = () => {
         setIsAnswerSubmitted(false);
         setCurrentQuestionIndex(0);
         setScore(0);
+        setGameOver(false);
     };
 
-    const skipQuestion = () => {    
+    const skipQuestion = () => {
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     };
 
@@ -100,13 +112,14 @@ const PlayQuiz = () => {
 
     const Score = () => {
 
-
-        //initially score is 0
-        //if answer is correct then score will be incremented by 1
-
         try {
             setScore(prevScore => prevScore + 1);
             console.log('score ', score + 1);
+           
+            
+
+            
+
 
         } catch (error) {
             console.log('error adding score ', error);
@@ -114,6 +127,7 @@ const PlayQuiz = () => {
 
     };
 
+   
 
     const fetchData = async () => {
         try {
@@ -135,7 +149,7 @@ const PlayQuiz = () => {
 
     useEffect(() => {
         FetchQuizName();
-      
+
 
         if (quizName) {
             fetchData();
@@ -143,17 +157,17 @@ const PlayQuiz = () => {
     }, [quizName]);
 
     // useEffect(() => {
-       
+
     //     console.log(correctAnswerIndices);
     //     FetchQuizName();
     // }, [correctAnswerIndices]);
 
     return (
-        <div className="flex flex-row ">
-        
+        <div className="flex lg:flex-row flex-col gap-8  p-44 ">
 
 
-            <div className="" id='quiz-section'>
+
+            <div className="w-full " id='quiz-section'>
                 <h1 className="font-bold text-3xl" > Put your knowledge to the test</h1>
                 <p className="text-2xl m-2 ">Are you the number one anime fan ?!</p>
                 {quizNames.map((quizName, index) => (
@@ -161,82 +175,124 @@ const PlayQuiz = () => {
                     >
                         <ul id="quiz-names-list">
                             <li>
-                            <button onClick={() => fetchTheQuiz(quizName)}
-                        id="quiz-name"
-                        className="rounded-full w-44  h-16  flex justify-center items-center m-4 bg-black" 
+                                <button onClick={() => fetchTheQuiz(quizName)}
+                                    id="quiz-name"
+                                    className="rounded-full w-2/3 text-white text-wrap h-16  flex justify-center items-center m-4 bg-[#4D455D] text-xl hover:bg-[#E96479] hover:shadow-lg "
 
-                        >{quizName}</button>
+                                >{quizName}</button>
                             </li>
                         </ul>
-                     
+
                     </div>
                 ))}
 
             </div>
-            <div id="quiz-Content" className="w-full m-auto">
-                {quizQuestions.length > 0 && currentQuestionIndex < quizQuestions.length && (
-                    <div key={currentQuestionIndex}>
-                        <h1>{quizQuestions[currentQuestionIndex].question}</h1>
-                        <div>
-                            {quizQuestions[currentQuestionIndex].answers.map((answer, answerIndex) => (
-                                <div key={answerIndex} id="button-wrapper">
-                                    <label 
-                                     id="custom-checkbox-label "
 
-                                         >
+            <div id="quiz-Content" className="w-full h-[700px]" >
+                {quizQuestions.length > 0 && currentQuestionIndex < quizQuestions.length && (
+                    <div key={currentQuestionIndex}
+                    >
+                        <div className=" ">
+
+
+                            <h1 className="text-2xl font-bold p-2 ">{quizQuestions[currentQuestionIndex].question}</h1>
+
+                            <div className="flex flex-col max-w-lg sm:max-w-lg ">
+                                {quizQuestions[currentQuestionIndex].answers.map((answer, answerIndex) => (
+                                    <div key={answerIndex} id="button-wrapper" className="flex flex-col justify-evenly ">
+
+                                        <input
+                                            id={`answer-${answerIndex}`}
+                                            type="checkbox"
+                                            value={answer}
+                                            className=" peer hidden"
+                                            checked={selectedAnswer === answer}
+                                            onChange={() => {
+                                                setSelectedAnswer(answer);
+                                            }}
+                                        />
+                                        <label
+                                            htmlFor={`answer-${answerIndex}`}
+                                            id="custom-checkbox-label"
+                                            className="select-none cursor-pointer rounded-full border-2 border-black m-2 bg-white
+                                        py-6 px-6 font-bold text-black transition-colors duration-200 ease-in-out peer-checked:bg-teal-600 peer-checked:text-white peer-checked:border-gray-200"
+                                        >
+                                            {answer}
+                                        </label>
+                                        {/* <label
+                                        id="custom-checkbox-label "
+
+                                    >
                                         <input
                                             type="checkbox"
                                             value={answer}
-                                           
-                                            className= ""
+
+                                            class=""
                                             checked={selectedAnswer === answer}
-                                            onChange={() =>
-                                                
-                                                 {
-                                                    setSelectedAnswer(answer)
-                                                 }
+                                            onChange={() => {
+                                                setSelectedAnswer(answer)
                                             }
-                                           
+                                            }
+
                                         />
                                         {answer}
-                                    </label>
-                                </div>
-                            ))}
-                        </div>
+                                    </label> */}
+                                    </div>
+                                ))}
+                            </div>
 
-                        <div>
-                            <button onClick={() => 
-                            {
-                            CheckIfCorrect(
-                                {
-                                    answer: selectedAnswer,
-                                    questionIndex: currentQuestionIndex,
-                                    quizName: quizName,
 
-                                }
+                            <div className="flex flex-row ">
+                                <button
+                                    className="bg-black text-white rounded-full w-44  h-16  flex justify-center items-center m-4  clickable"
+                                    onClick={() => {
+                                        CheckIfCorrect(
+                                            {
+                                                answer: selectedAnswer,
+                                                questionIndex: currentQuestionIndex,
+                                                quizName: quizName,
 
-                               
-                            )}
-                            }
-                            
-                            >Submit</button>
-                            <button onClick={skipQuestion}>Skip</button>
+                                            }
+
+
+                                        )
+                                    }
+                                    }
+
+                                >Submit</button>
+                                <button
+                                    className="bg-red-300 text-black rounded-full w-44  h-16  flex justify-center items-center m-4  clickable"
+                                    onClick={skipQuestion}>Skip</button>
+                            </div>
                         </div>
                     </div>
                 )}
 
+                {
+                    gameOver && (
+                        <div className="text-center bg-white shadow-md p-12 border-2 border-black rounded-lg">
+                        {quizQuestions.length > 0 && currentQuestionIndex === quizQuestions.length && (
+                            <div>
+                                <h1 className="font-bold text-5xl ">Quiz Completed !</h1>
+                                <h1 className="font-bold text-3xl ">Your score is {score}</h1>
+                                <button 
+                                className="bg-[#4D455D] text-white rounded-full w-44 h-16 m-4  hover:bg-[#E96479] hover:shadow-lg hover:translate-y-2 "
+                                onClick={replayQuiz}>Replay Quiz</button>
+                            </div>
+                        )}
+                    </div>
+                    )
+                }
+
+              
+
             </div>
 
-            <div>
-                {quizQuestions.length > 0 && currentQuestionIndex === quizQuestions.length && (
-                    <div>
-                        <h1>Quiz Completed</h1>
-                        <h1>Score</h1>
-                        <h1>{score}</h1>
-                        <button onClick={replayQuiz}>Replay Quiz</button>
-                    </div>
-                )}
-            </div>
+
+
+
+
+
         </div>
     );
 
