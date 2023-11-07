@@ -5,6 +5,7 @@ import { auth, db } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, collection, query, where, addDoc, setDoc, getDocs } from 'firebase/firestore/lite';
 import { AuthContext } from "./AuthProvider";
+import { set } from "mongoose";
 
 
 const Login = () => {
@@ -12,10 +13,12 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [loginLoading, setLoginLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setLoginLoading(true);
         try {
             await signInWithEmailAndPassword(auth, email, password);
 
@@ -43,8 +46,8 @@ const Login = () => {
                 } else {
                     console.log("No matching documents found");
                 }
-            } 
-
+            }
+            setLoginLoading(false);
         } catch (error) {
             switch (error.code) {
                 case "auth/invalid-login-credentials":
@@ -68,10 +71,11 @@ const Login = () => {
                 default:
                     setError(error.code);
             }
+            setLoginLoading(false);
         }
     };
 
-   
+
 
     return (
         <div>
@@ -112,8 +116,22 @@ const Login = () => {
                                 <a href="#" className="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700">Forgot Password?</a>
                             </div>
 
-                            <button type="submit" className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg
-                    px-4 py-3 mt-6">Log In</button>
+                            <button
+                                type="submit"
+                                className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6"
+                                disabled={loginLoading}
+                            >
+                                {loginLoading ? (
+                                    <div className="flex items-center justify-center">
+                                        <span className="mr-2 text-white">Logging In...</span>
+                                        <div className="animate-spin h-4 w-3.5 border-t-2 border-b-2 border-white rounded-full"></div>
+                                    </div>
+                                ) : (
+                                    'Log In'
+                                )
+                                }
+                            </button>
+
                         </form>
 
                         <hr className="my-6 border-gray-300 w-full" />
