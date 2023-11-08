@@ -4,6 +4,7 @@ import { db } from '../../firebase';
 import { collection, doc, query, updateDoc, where } from 'firebase/firestore/lite';
 import { addDoc, getDocs } from 'firebase/firestore/lite';
 import { useEffect } from 'react';
+import AdminSidebar from '../../layout/AdminSidebar';
 
 
 
@@ -388,13 +389,17 @@ const Quiz = () => {
 
 
     return (
-        <div>
+        <div className='flex '>
+               <div className="w-64 bg-gray-200">
+                <AdminSidebar />
+            </div>
+            
 
-            <PlayQuiz />
+            {/* <PlayQuiz /> */}
 
             {/* Display Quizzes */}
 
-            <div>
+            <div className=''>
                 {
                     quiz.map((selectedQuiz, index) => (
                         <div key={index} className='border-2 border-black p-6 ' id={selectedQuiz.quizId}>
