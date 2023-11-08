@@ -4,6 +4,7 @@ import './index.css';
 import NavigationLayout from './layout/NavigationLayout'
 import AppRoutes from './Routes'
 import { AuthContext } from './pages/auth/AuthProvider';
+import Homepage from './Homepage';
 
 function App() {
     const { isLoggedIn } = useContext(AuthContext);
@@ -12,6 +13,7 @@ function App() {
       <div>
          <div>
             <NavigationLayout />
+            
          </div>
           <div>
               <AppRoutes />

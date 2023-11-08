@@ -8,9 +8,15 @@ const Register = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+
     const [error, setError] = useState("");
     const [loginLoading, setLoginLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState("")
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -74,7 +80,7 @@ const Register = () => {
                     <div className="w-full h-100">
 
 
-                        <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12">Create an account</h1>
+                        <h1 className="text-3xl md:text-3xl font-bold leading-tight mt-12 text-[#20615B]">Create an account</h1>
 
                         <form className="mt-6" onSubmit={handleRegister}>
                             {error && <p className="text-red-500">{error}</p>}
@@ -84,32 +90,48 @@ const Register = () => {
                                 <input type="name" name="name"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
-                                    placeholder="Enter Full Name" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autoFocus required />
+                                    placeholder="Enter Full Name" className="w-full px-4 py-3 rounded-lg focus:border-[#20615B]  mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autoFocus required />
                             </div>
                             <div className="mt-4">
                                 <label className="block text-gray-700">Email Address</label>
                                 <input type="email" name="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autoFocus required />
+                                    placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg focus:border-[#20615B]  mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autoFocus required />
                             </div>
 
                             <div className="mt-4">
                                 <label className="block text-gray-700">Password</label>
-                                <input type="password" name="password"
+
+                                <div className="flex flex-col  w-full rounded-lg items-end">
+                                <input type={showPassword ? 'text' : 'password'}
+                                name="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    placeholder="Enter Password" minLength="6" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                                    placeholder="Enter Password" minLength="6" className="w-full px-4 py-3 rounded-lg focus:border-[#20615B]  mt-2 border focus:border-blue-500
               focus:bg-white focus:outline-none" required />
+
+<button
+                                        type="button"
+                                        className="text-gray-600 cursor-pointer underline "
+                                        onClick={togglePasswordVisibility}
+                                    >
+                                        {showPassword ? 'Hide' : 'Show'}
+                                    </button>
+
+
+
+                                </div>
+                            
                             </div>
 
-                            <div className="text-right mt-2">
+                            {/* <div className="text-right mt-2">
                                 <a href="#" className="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700">Forgot Password?</a>
-                            </div>
+                            </div> */}
 
                             <button 
                             type="submit" 
-                            className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6"
+                            className="w-full block bg-black hover:bg-[#20615B] text-white font-semibold rounded-lg px-4 py-3 mt-6"
                             disabled={loginLoading}
                             >
                                 {loginLoading ? (

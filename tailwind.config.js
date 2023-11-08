@@ -15,8 +15,14 @@ export default {
       },
       height:{
         '500' : '500px',
+        '700' : '700px',
         '800' : '800px',
+
       },
+      colors:{
+        'quiz-green' : '#4D455D',
+        'quiz-red' : '#E96479'
+      }
     },
   },
   plugins: [],
