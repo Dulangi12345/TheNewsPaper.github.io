@@ -8,7 +8,7 @@ import { collection, updateDoc, setDoc, getDocs, deleteDoc, getDoc, orderBy, que
 import { doc } from 'firebase/firestore/lite';
 import { getFirestore } from 'firebase/firestore/lite';
 import { useNavigate } from 'react-router-dom';
-
+import AdminSidebar from '../../layout/AdminSidebar';
 
 
 const AddAnimeCorner = () => {
@@ -476,7 +476,10 @@ const AddAnimeCorner = () => {
 
 
 
-        <div >
+        <div className='flex'>
+        <div className="w-64 bg-gray-200">
+                <AdminSidebar />
+            </div>
 
 
             {/* <div>

@@ -7,6 +7,7 @@ import { storage } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import AdminSidebar from '../../layout/AdminSidebar';
 
 
 const AddFreeArticles = () => {
@@ -460,7 +461,11 @@ const AddFreeArticles = () => {
     }
 
     return (
-        <div>
+        <div className='flex'>
+             <div className="w-64 bg-gray-200">
+                <AdminSidebar />
+            </div>
+
             <form action="" className=''>
                 <div className='space-y-12'>
 
