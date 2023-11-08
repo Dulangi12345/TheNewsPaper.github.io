@@ -3,6 +3,7 @@ import { doc, collection, getDoc } from 'firebase/firestore/lite';
 import { db } from '../../firebase';
 import { Container, Row, Col } from 'react-grid-system';
 import { Link } from 'react-router-dom';
+import Footer from '../../layout/footer';
 
 const truncateString = (str, num) => {
     if (str) {
@@ -59,17 +60,20 @@ const TravelAndLifestyle = () => {
 
 
     return (
+        <div>
         <div className='mx-24 mt-24'>
             {firstArticleIndex >= 0 && secondArticleIndex >= 0 && secondArticleIndex < ArticlesData.length ? (
                 <Row>
                     <Col md={8}>
                         <div className="rounded overflow-hidden mb-6">
-                            <div className="px-6 py-4 flex items-center">
+                            <div className="px-6 py-4 flex items-center flex lg:flex-row flex-col">
                                 <div>
                                     <Link to={`/catalyst/travel-and-lifestyle/${firstArticleIndex}`}>
-                                        <div className="font-bold text-3xl mb-2 hover:text-gray-600">{ArticlesData[firstArticleIndex].articleTitle}</div>
+                                        <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[firstArticleIndex].articleTitle}</div>
                                     </Link>
-                                    <p className="text-gray-700 text-base" style={{ whiteSpace: 'pre-line' }}>
+                                    <p className="text-gray-700 text-base" 
+                                    id="article-content"
+                                    style={{ whiteSpace: 'pre-line' }}>
                                         {truncateString(ArticlesData[firstArticleIndex].articleDescription, 590)}
                                         <Link to={`/catalyst/travel-and-lifestyle/${firstArticleIndex}`} className="text-blue-500">
                                             Read More
@@ -89,12 +93,14 @@ const TravelAndLifestyle = () => {
 
                     <Col md={4}>
                         <div className="rounded overflow-hidden mb-6">
-                            <div className="px-6 py-4 items-center">
+                            <div className="px-6 py-4 items-center ">
                                 <div>
                                     <Link to={`/catalyst/travel-and-lifestyle/${secondArticleIndex}`}>
-                                        <div className="font-bold text-3xl mb-2 hover:text-gray-600">{ArticlesData[secondArticleIndex].articleTitle}</div>
+                                        <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[secondArticleIndex].articleTitle}</div>
                                     </Link>
-                                    <p className="text-gray-700 text-base" style={{ whiteSpace: 'pre-line' }}>
+                                    <p className="text-gray-700 text-base" 
+                                    id="article-content"
+                                    style={{ whiteSpace: 'pre-line' }}>
                                         {truncateString(ArticlesData[secondArticleIndex].articleDescription, 300)}
                                         <Link to={`/catalyst/travel-and-lifestyle/${secondArticleIndex}`} className="text-blue-500">
                                             Read More
@@ -124,12 +130,14 @@ const TravelAndLifestyle = () => {
                 <Row>
                     <Col md={8}>
                         <div className="rounded overflow-hidden mb-6">
-                            <div className="px-6 py-4 flex items-center">
+                            <div className="px-6 py-4 flex items-center flex lg:flex-row flex-col">
                                 <div>
                                     <Link to={`/catalyst/travel-and-lifestyle/${thirdArticleIndex}`}>
-                                        <div className="font-bold text-3xl mb-2 hover:text-gray-600">{ArticlesData[thirdArticleIndex].articleTitle}</div>
+                                        <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[thirdArticleIndex].articleTitle}</div>
                                     </Link>
-                                    <p className="text-gray-700 text-base" style={{ whiteSpace: 'pre-line' }}>
+                                    <p className="text-gray-700 text-base" 
+                                    id="article-content"
+                                    style={{ whiteSpace: 'pre-line' }}>
                                         {truncateString(ArticlesData[thirdArticleIndex].articleDescription, 600)}
                                         <Link to={`/catalyst/travel-and-lifestyle/${thirdArticleIndex}`} className="text-blue-500">
                                             Read More
@@ -151,9 +159,11 @@ const TravelAndLifestyle = () => {
                             <div className="px-6 py-4 items-center">
                                 <div>
                                     <Link to={`/catalyst/travel-and-lifestyle/${fourthArticleIndex}`}>
-                                        <div className="font-bold text-3xl mb-2 hover:text-gray-600">{ArticlesData[fourthArticleIndex].articleTitle}</div>
+                                        <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[fourthArticleIndex].articleTitle}</div>
                                     </Link>
-                                    <p className="text-gray-700 text-base" style={{ whiteSpace: 'pre-line' }}>
+                                    <p className="text-gray-700 text-base" 
+                                    id="article-content"
+                                    style={{ whiteSpace: 'pre-line' }}>
                                         {truncateString(ArticlesData[fourthArticleIndex].articleDescription, 300)}
                                         <Link to={`/catalyst/travel-and-lifestyle/${fourthArticleIndex}`} className="text-blue-500">
                                             Read More
@@ -182,12 +192,14 @@ const TravelAndLifestyle = () => {
                 <Row>
                     <Col md={8}>
                         <div className="rounded overflow-hidden mb-6">
-                            <div className="px-6 py-4 flex items-center">
+                            <div className="px-6 py-4 flex items-center flex lg:flex-row flex-col">
                                 <div>
                                     <Link to={`/catalyst/travel-and-lifestyle/${fifthArticleIndex}`}>
-                                        <div className="font-bold text-3xl mb-2 hover:text-gray-600">{ArticlesData[fifthArticleIndex].articleTitle}</div>
+                                        <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[fifthArticleIndex].articleTitle}</div>
                                     </Link>
-                                    <p className="text-gray-700 text-base" style={{ whiteSpace: 'pre-line' }}>
+                                    <p className="text-gray-700 text-base" 
+                                    id="article-content"
+                                    style={{ whiteSpace: 'pre-line' }}>
                                         {truncateString(ArticlesData[fifthArticleIndex].articleDescription, 600)}
                                         <Link to={`/catalyst/travel-and-lifestyle/${fifthArticleIndex}`} className="text-blue-500">
                                             Read More
@@ -209,9 +221,11 @@ const TravelAndLifestyle = () => {
                             <div className="px-6 py-4 items-center">
                                 <div>
                                     <Link to={`/catalyst/travel-and-lifestyle/${sixthArticleIndex}`}>
-                                        <div className="font-bold text-3xl mb-2 hover:text-gray-600">{ArticlesData[sixthArticleIndex].articleTitle}</div>
+                                        <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[sixthArticleIndex].articleTitle}</div>
                                     </Link>
-                                    <p className="text-gray-700 text-base" style={{ whiteSpace: 'pre-line' }}>
+                                    <p className="text-gray-700 text-base" 
+                                    id="article-content"
+                                    style={{ whiteSpace: 'pre-line' }}>
                                         {truncateString(ArticlesData[sixthArticleIndex].articleDescription, 300)}
                                         <Link to={`/catalyst/travel-and-lifestyle/${sixthArticleIndex}`} className="text-blue-500">
                                             Read More
@@ -239,19 +253,21 @@ const TravelAndLifestyle = () => {
             {seventhArticleIndex >= 0 && eighthArticleIndex >= 0 && eighthArticleIndex < ArticlesData.length ? (
                 <Row className='mt-12'>
                     <Col md={6}>
-                        <div className="rounded overflow-hidden mb-6 border-r-2 pr-4">
-                            <div className="px-6 py-4 items-center">
+                        <div className="rounded overflow-hidden mb-6 lg:border-r-2 pr-4">
+                            <div className="px-6 py-4 items-center ">
 
                                 <Link to={`/catalyst/travel-and-lifestyle/${seventhArticleIndex}`}>
-                                    <div className="font-bold text-3xl mb-2 hover:text-gray-600">{ArticlesData[seventhArticleIndex].articleTitle}</div>
+                                    <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[seventhArticleIndex].articleTitle}</div>
                                 </Link>
-                                <div className='flex'>
+                                <div className='flex  lg:flex-row flex-col'>
                                     <img
                                         className="md:w-72 h-64 object-cover"
                                         src={ArticlesData[seventhArticleIndex].articleImage}
                                         alt="Current Event"
                                     />
-                                    <p className="text-gray-700 text-base ml-4" style={{ whiteSpace: 'pre-line' }}>
+                                    <p className="text-gray-700 text-base ml-4" 
+                                    id="article-content"
+                                    style={{ whiteSpace: 'pre-line' }}>
                                         {truncateString(ArticlesData[seventhArticleIndex].articleDescription, 500)}
                                         <Link to={`/catalyst/travel-and-lifestyle/${seventhArticleIndex}`} className="text-blue-500">
                                             Read More
@@ -268,15 +284,17 @@ const TravelAndLifestyle = () => {
                             <div className="px-6 py-4 items-center">
 
                                 <Link to={`/catalyst/travel-and-lifestyle/${eighthArticleIndex}`}>
-                                    <div className="font-bold text-3xl mb-2 hover:text-gray-600">{ArticlesData[eighthArticleIndex].articleTitle}</div>
+                                    <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[eighthArticleIndex].articleTitle}</div>
                                 </Link>
-                                <div className='flex'>
+                                <div className='flex  lg:flex-row flex-col'>
                                     <img
                                         className="md:w-72 h-64 object-cover"
                                         src={ArticlesData[eighthArticleIndex].articleImage}
                                         alt="Current Event"
                                     />
-                                    <p className="text-gray-700 text-base ml-4" style={{ whiteSpace: 'pre-line' }}>
+                                    <p className="text-gray-700 text-base ml-4" 
+                                    id="article-content"
+                                    style={{ whiteSpace: 'pre-line' }}>
                                         {truncateString(ArticlesData[eighthArticleIndex].articleDescription, 500)}
                                         <Link to={`/catalyst/travel-and-lifestyle/${eighthArticleIndex}`} className="text-blue-500">
                                             Read More
@@ -295,6 +313,8 @@ const TravelAndLifestyle = () => {
                     </div>
                 </Col>
             )}
+        </div>
+        <Footer />
         </div>
     );
 };

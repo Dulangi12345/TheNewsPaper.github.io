@@ -36,11 +36,16 @@ const CatalystHomepage = () => {
                     <div className="flex flex-wrap">
                         <div className="p-2">
                             <div className="rounded-md p-4">
-                                <div className="flex justify-between">
-                                    <h2 className="text-3xl mb-3">{articleData.articleTitle}</h2>
+                                <div className="">
+                                    <h2 className="text-5xl font-bold text-center  mb-3" id="article-title">{articleData.articleTitle}</h2>
                                 </div>
-                                <img src={articleData.articleImage} alt="Homepage Image" className="w-full h-96 object-cover mt-4" />
-                                <p className="text-gray-700 mt-14" style={{ whiteSpace: 'pre-line' }}>{articleData.articleDescription}</p>
+                                <h3 className=" text-xl italic text-center mb-10">
+                                    by Shelly Adams
+                                </h3>
+                                <img src={articleData.articleImage} alt="Homepage Image" className="w-full h-[800px] object-fill mt-4" />
+                                <p className="text-gray-700 mt-14 text-xl"
+                                id="article-content"
+                                 style={{ whiteSpace: 'pre-line' }}>{articleData.articleDescription}</p>
 
                             </div>
                         </div>
@@ -52,6 +57,8 @@ const CatalystHomepage = () => {
                     </div>
                 )}
             </div>
+
+            <Footer />
         </div>
     );
 };

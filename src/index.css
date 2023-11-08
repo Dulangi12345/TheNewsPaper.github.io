@@ -171,13 +171,8 @@
 
 
   #anime-name {
-    text-align: left;
     font-family: 'IBM Plex Sans', sans-serif;
-    color: #F5E9CF;
-    background-color: black;
-    border: white 2px solid ;
-    padding: 2px;
-    background-clip: border-box;
+
 
 
   }
@@ -185,14 +180,15 @@
 
   #anime-content{
     font-family: 'IBM Plex Sans', sans-serif;
-    color: #F5E9CF;
 
   }
 
-
-  #anime{
-    height: 700px;
+  #quiz-heading{
+    font-family: 'Lilita One', sans-serif;
   }
+
+
+
 
 
   
@@ -253,7 +249,7 @@
 }
 
 
-#free-article-title{
+#article-title{
    font-family: 'PT Serif', serif; 
 } 
 

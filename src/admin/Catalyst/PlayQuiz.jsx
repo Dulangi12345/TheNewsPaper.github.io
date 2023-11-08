@@ -149,7 +149,7 @@ const PlayQuiz = () => {
 
     useEffect(() => {
         FetchQuizName();
-
+   
 
         if (quizName) {
             fetchData();
@@ -163,13 +163,13 @@ const PlayQuiz = () => {
     // }, [correctAnswerIndices]);
 
     return (
-        <div className="flex lg:flex-row flex-col gap-8  p-44 ">
+        <div className="flex lg:flex-row flex-col gap-8 ">
 
 
 
-            <div className="w-full " id='quiz-section'>
-                <h1 className="font-bold text-3xl" > Put your knowledge to the test</h1>
-                <p className="text-2xl m-2 ">Are you the number one anime fan ?!</p>
+            <div className="w-full p-8  " >
+                <h1 className="text-5xl text-[#116D6E]"  id="quiz-heading"> Put your knowledge to the test</h1>
+                <p className="text-2xl mt-4 " id="quiz-heading">Are you the number one anime fan ?!</p>
                 {quizNames.map((quizName, index) => (
                     <div key={index}
                     >
@@ -177,7 +177,7 @@ const PlayQuiz = () => {
                             <li>
                                 <button onClick={() => fetchTheQuiz(quizName)}
                                     id="quiz-name"
-                                    className="rounded-full w-2/3 text-white text-wrap h-16  flex justify-center items-center m-4 bg-[#4D455D] text-xl hover:bg-[#E96479] hover:shadow-lg "
+                                    className="rounded-full w-1/3 text-white text-wrap h-16  flex justify-center items-center m-4 bg-[#116D6E] text-xl hover:bg-[#A21232] hover:shadow-lg "
 
                                 >{quizName}</button>
                             </li>
@@ -244,7 +244,7 @@ const PlayQuiz = () => {
 
                             <div className="flex flex-row ">
                                 <button
-                                    className="bg-black text-white rounded-full w-44  h-16  flex justify-center items-center m-4  clickable"
+                                    className="bg-[#116D6E] text-white text-lg rounded-full w-44  h-16  flex justify-center items-center m-4 "
                                     onClick={() => {
                                         CheckIfCorrect(
                                             {
@@ -261,7 +261,7 @@ const PlayQuiz = () => {
 
                                 >Submit</button>
                                 <button
-                                    className="bg-red-300 text-black rounded-full w-44  h-16  flex justify-center items-center m-4  clickable"
+                                        className="bg-[#A21232] text-white text-lg rounded-full w-44  h-16  flex justify-center items-center m-4 "
                                     onClick={skipQuestion}>Skip</button>
                             </div>
                         </div>

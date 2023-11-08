@@ -144,12 +144,15 @@ const NavigationLayout = () => {
 
     //Home Path name
     const isHomepage = location.pathname === '/';
+    const isLogin = location.pathname === '/login';
+    const isRegister = location.pathname === '/register';
+
 
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);
     };
 
-    
+
 
 
     return (
@@ -176,12 +179,13 @@ const NavigationLayout = () => {
                                 </svg>
                             </button>
                         </div>
-                        {isHomepage && (
+
+                        {isRegister && (
 
 
-                            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                                <div className="hidden sm:ml-6 sm:block md:ml-6 md:block">
-                                    <div className="flex space-x-4">
+                            <div className="flex  items-center justify-center sm:items-stretch sm:justify-start m-auto left-0 right-0">
+                                <div className="hidden sm:ml-6 sm:block md:ml-6 md:block  ">
+                                    <div className="flex space-x-4  " id='nav-links'>
                                         <div className="text-black hover:underline rounded-md px-3 py-2 text-sm font-bold" >
                                             <Link to="/">Home</Link>
                                         </div>
@@ -195,7 +199,78 @@ const NavigationLayout = () => {
                                             <Link to="/CTTLive/homepage">CTT Live</Link>
                                         </div>
                                         {isLoggedIn ? (
-                                            <div className=' text-black hover:underline rounded-md px-3 py-2 text-sm font-bold' onClick={() => { logout(); navigate('/'); }}>
+                                            <div className='cursor-pointer  text-black hover:underline rounded-md px-3 py-2 text-sm font-bold' onClick={() => { logout(); navigate('/'); }}>
+                                                <span>Logout</span>
+                                            </div>
+                                        ) : (
+                                            <div className='  text-black hover:underline rounded-md px-3 py-2 text-sm font-bold'>
+                                                <Link to="/login">Login</Link>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        )}
+
+                        {isLogin && (
+
+
+                            <div className="flex  items-center justify-center sm:items-stretch sm:justify-start m-auto left-0 right-0">
+                                <div className="hidden sm:ml-6 sm:block md:ml-6 md:block  ">
+                                    <div className="flex space-x-4  " id='nav-links'>
+                                        <div className="text-black hover:underline rounded-md px-3 py-2 text-sm font-bold" >
+                                            <Link to="/">Home</Link>
+                                        </div>
+                                        <div className="text-black hover:underline rounded-md px-3 py-2 text-sm font-bold">
+                                            <Link to="/catalyst/homepage">Catalyst</Link>
+                                        </div>
+                                        <div className="text-black hover:underline rounded-md px-3 py-2 text-sm font-bold">
+                                            <Link to="/kagura/homepage">Kagura</Link>
+                                        </div>
+                                        <div className="text-black hover:underline rounded-md px-3 py-2 text-sm font-bold">
+                                            <Link to="/CTTLive/homepage">CTT Live</Link>
+                                        </div>
+                                        {isLoggedIn ? (
+                                            <div className='cursor-pointer  text-black hover:underline rounded-md px-3 py-2 text-sm font-bold' onClick={() => { logout(); navigate('/'); }}>
+                                                <span>Logout</span>
+                                            </div>
+                                        ) : (
+                                            <div className='  text-black hover:underline rounded-md px-3 py-2 text-sm font-bold'>
+                                                <Link to="/login">Login</Link>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        )}
+
+
+                        {isHomepage && (
+
+
+                            <div className="flex  items-center justify-center sm:items-stretch sm:justify-start m-auto left-0 right-0">
+                                <div className="hidden sm:ml-6 sm:block md:ml-6 md:block">
+                                    <div className="flex space-x-4 " id='nav-links'>
+                                        <div className="text-black hover:underline rounded-md px-3 py-2 text-sm font-bold" >
+                                            <Link to="/">Home</Link>
+                                        </div>
+                                        <div className="text-black hover:underline rounded-md px-3 py-2 text-sm font-bold">
+                                            <Link to="/catalyst/homepage">Catalyst</Link>
+                                        </div>
+                                        <div className="text-black hover:underline rounded-md px-3 py-2 text-sm font-bold">
+                                            <Link to="/kagura/homepage">Kagura</Link>
+                                        </div>
+                                        <div className="text-black hover:underline rounded-md px-3 py-2 text-sm font-bold">
+                                            <Link to="/CTTLive/homepage">CTT Live</Link>
+                                        </div>
+                                        {isLoggedIn ? (
+                                            <div className='cursor-pointer  text-black hover:underline rounded-md px-3 py-2 text-sm font-bold' onClick={() => { logout(); navigate('/'); }}>
                                                 <span>Logout</span>
                                             </div>
                                         ) : (
@@ -255,7 +330,7 @@ const NavigationLayout = () => {
                                         </div>
                                     </div>
                                 </div>
-                       
+
                             </div>
 
 
@@ -284,7 +359,7 @@ const NavigationLayout = () => {
                                         </div>
                                     </div>
 
-                               
+
                                 </div>
                             )
                         }
@@ -316,6 +391,67 @@ const NavigationLayout = () => {
                 </div>
 
                 <div className={`sm:hidden md:hidden lg:hidden ${isMobileMenuOpen ? "block" : "hidden"}`} id="mobile-menu">
+                {isRegister && (
+                        <div className="space-y-1 px-2 pb-3 pt-2">
+                            <div className="hover:underline block rounded-md px-3 py-2 text-base font-bold" aria-current="page">
+                                <Link to="/">Home</Link>
+                            </div>
+                            <div className=" hover:underline block rounded-md px-3 py-2 text-base font-bold">
+                                <Link to="/catalyst/homepage">Catalyst</Link>
+
+                            </div>
+                            <div className=" hover:underline block rounded-md px-3 py-2 text-base font-bold">
+                                <Link to="/kagura/homepage">Kagura</Link>
+                            </div>
+                            <div className=" hover:underline block rounded-md px-3 py-2 text-base font-bold">
+
+                                <Link to="/CTTLive/homepage">CTT Live</Link>
+
+                            </div>
+                            {isLoggedIn ? (
+                                <div className='cursor-pointer  hover:underline block rounded-md px-3 py-2 text-base font-bold' onClick={() => { logout(); navigate('/'); }}>
+                                    <span>Logout</span>
+                                </div>
+                            ) : (
+                                <div className='cursor-pointer  hover:underline block rounded-md px-3 py-2 text-base font-bold'>
+                                    <Link to="/login">Login</Link>
+                                </div>
+                            )}
+                        </div>
+
+                    )
+                    }
+
+                {isLogin && (
+                        <div className="space-y-1 px-2 pb-3 pt-2">
+                            <div className="hover:underline block rounded-md px-3 py-2 text-base font-bold" aria-current="page">
+                                <Link to="/">Home</Link>
+                            </div>
+                            <div className=" hover:underline block rounded-md px-3 py-2 text-base font-bold">
+                                <Link to="/catalyst/homepage">Catalyst</Link>
+
+                            </div>
+                            <div className=" hover:underline block rounded-md px-3 py-2 text-base font-bold">
+                                <Link to="/kagura/homepage">Kagura</Link>
+                            </div>
+                            <div className=" hover:underline block rounded-md px-3 py-2 text-base font-bold">
+
+                                <Link to="/CTTLive/homepage">CTT Live</Link>
+
+                            </div>
+                            {isLoggedIn ? (
+                                <div className='cursor-pointer  hover:underline block rounded-md px-3 py-2 text-base font-bold' onClick={() => { logout(); navigate('/'); }}>
+                                    <span>Logout</span>
+                                </div>
+                            ) : (
+                                <div className='cursor-pointer  hover:underline block rounded-md px-3 py-2 text-base font-bold'>
+                                    <Link to="/login">Login</Link>
+                                </div>
+                            )}
+                        </div>
+
+                    )
+                    }
                     {isHomepage && (
                         <div className="space-y-1 px-2 pb-3 pt-2">
                             <div className="hover:underline block rounded-md px-3 py-2 text-base font-bold" aria-current="page">
@@ -334,7 +470,7 @@ const NavigationLayout = () => {
 
                             </div>
                             {isLoggedIn ? (
-                                <div className=' hover:underline block rounded-md px-3 py-2 text-base font-bold' onClick={() => { logout(); navigate('/'); }}>
+                                <div className='cursor-pointer  hover:underline block rounded-md px-3 py-2 text-base font-bold' onClick={() => { logout(); navigate('/'); }}>
                                     <span>Logout</span>
                                 </div>
                             ) : (
@@ -359,9 +495,9 @@ const NavigationLayout = () => {
                             </div>
 
                             <div>
-                            <div  >
-                                 <DropdownMenu />
-                            </div>
+                                <div  >
+                                    <DropdownMenu />
+                                </div>
                             </div>
                             <div className=" hover:underline block rounded-md px-3 py-2 text-base font-bold">
                                 <Link to="/catalyst/current-events">Current Events</Link>
@@ -441,24 +577,24 @@ const NavigationLayout = () => {
                     {
                         location.pathname.includes('/CTTLive') && !location.pathname.includes('admin') && (
                             <div className="space-y-1 px-2 pb-3 pt-2">
-                            <div className="hover:underline block rounded-md px-3 py-2 text-base font-bold" aria-current="page">
-                                <Link to="/">Home</Link>
-                            </div>
-                            <div className="hover:underline block rounded-md px-3 py-2 text-base font-bold">
-                            <Link to="/CTTLive/homepage">CTT Live Homepage</Link>
+                                <div className="hover:underline block rounded-md px-3 py-2 text-base font-bold" aria-current="page">
+                                    <Link to="/">Home</Link>
+                                </div>
+                                <div className="hover:underline block rounded-md px-3 py-2 text-base font-bold">
+                                    <Link to="/CTTLive/homepage">CTT Live Homepage</Link>
+
+                                </div>
+                                <div className="hover:underline block rounded-md px-3 py-2 text-base font-bold">
+                                    <Link to="/catalyst/homepage">Catalyst</Link>
+                                </div>
+                                <div className="hover:underline block rounded-md px-3 py-2 text-base font-bold">
+
+                                    <Link to="/kagura/homepage">Kagura</Link>
+
+                                </div>
+
 
                             </div>
-                            <div className="hover:underline block rounded-md px-3 py-2 text-base font-bold">
-                            <Link to="/catalyst/homepage">Catalyst</Link>
-                            </div>
-                            <div className="hover:underline block rounded-md px-3 py-2 text-base font-bold">
-
-                            <Link to="/kagura/homepage">Kagura</Link>
-
-                            </div>
-
-
-                        </div>
 
                         )}
 
