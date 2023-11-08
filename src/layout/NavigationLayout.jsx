@@ -161,7 +161,7 @@ const NavigationLayout = () => {
 
 
                 {isHomepage && (
-                    <div className="relative flex h-16 items-center justify-between text-center items-baseline bg-white lg:rounded-full rounded-3xl m-4 shadow-md border-2 border-gray-100 mx-auto max-w-7xl">
+                    <div className="relative flex h-16 items-center justify-between text-center bg-white lg:rounded-full rounded-3xl m-4 shadow-md border-2 border-gray-100 mx-auto max-w-7xl">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden md:hidden">
                             <button
                                 type="button"
@@ -240,7 +240,7 @@ const NavigationLayout = () => {
                 )}
 
                 {location.pathname.includes('/catalyst') && !location.pathname.includes('admin') && (
-                    <div className="relative flex h-16 items-center justify-between text-center items-baseline bg-white lg:rounded-full rounded-3xl m-4 shadow-md border-2 border-gray-100 mx-auto max-w-7xl ">
+                    <div className="relative flex h-16 justify-between text-center items-baseline bg-white lg:rounded-full rounded-3xl m-4 shadow-md border-2 border-gray-100 mx-auto max-w-7xl ">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden md:hidden ">
                             <button
                                 type="button"
@@ -388,7 +388,7 @@ const NavigationLayout = () => {
                         {
                             location.pathname.includes('/kagura') && !location.pathname.includes('admin') && (
 
-                                <div className="relative flex h-16 items-center justify-between text-center items-baseline bg-white lg:rounded-full rounded-3xl m-4 shadow-md border-2 border-gray-100 mx-auto max-w-7xl ">
+                                <div className="relative flex h-16 items-center justify-between text-center bg-white lg:rounded-full rounded-3xl m-4 shadow-md border-2 border-gray-100 mx-auto max-w-7xl ">
                                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden md:hidden ">
                                         <button
                                             type="button"
@@ -466,7 +466,7 @@ const NavigationLayout = () => {
 
                                     {
                                         location.pathname.includes('/CTTLive') && !location.pathname.includes('admin') && (
-                                            <div className="relative flex h-16 items-center justify-between text-center items-baseline bg-white lg:rounded-full rounded-3xl m-4 shadow-md border-2 border-gray-100 mx-auto max-w-7xl ">
+                                            <div className="relative flex h-16 items-center justify-between text-center bg-white lg:rounded-full rounded-3xl m-4 shadow-md border-2 border-gray-100 mx-auto max-w-7xl ">
                                                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden md:hidden ">
                                                     <button
                                                         type="button"
