@@ -16,7 +16,7 @@ const truncateString = (str, num) => {
 
 const CurrentEvents = () => {
     const [ArticlesData, setArticlesData] = useState([
-        { articleTitle: '', articleDescription: '', articleImage: '' },
+        { articleTitle: '', articleAuthor: '' , articleDescription: '', articleImage: '' },
     ]);
     const [Loading, setLoading] = useState(true);
 
@@ -46,7 +46,6 @@ const CurrentEvents = () => {
                 setArticlesData(articlesArray);
                 console.log('Document data:', articlesArray);
             } else {
-                // doc.data() will be undefined in this case
                 console.error('No such document!');
             }
         } catch (error) {
@@ -71,6 +70,8 @@ const CurrentEvents = () => {
                                     <Link to={`/catalyst/current-events/${firstArticleIndex}`}>
                                         <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[firstArticleIndex].articleTitle}</div>
                                     </Link>
+                                    <h1 className='font-bold  mb-2'>by {ArticlesData[firstArticleIndex].articleAuthor}</h1>
+
                                     <p className="text-gray-700 text-base" 
                                         id="article-content"
                                         style={{ whiteSpace: 'pre-line' }}>
@@ -98,6 +99,8 @@ const CurrentEvents = () => {
                                     <Link to={`/catalyst/current-events/${secondArticleIndex}`}>
                                         <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[secondArticleIndex].articleTitle}</div>
                                     </Link>
+                                    <h1 className='font-bold  mb-2'>by {ArticlesData[secondArticleIndex].articleAuthor}</h1>
+
                                     <p className="text-gray-700 text-base" 
                                     id="article-content"
                                     style={{ whiteSpace: 'pre-line' }}>
@@ -121,7 +124,7 @@ const CurrentEvents = () => {
             ) : (
                 <Col>
                     <div className="rounded overflow-hidden mb-6 h-96">
-                        <p className='text-3xl'>Loading...</p>
+                        <p className='text-md'>Loading...</p>
                     </div>
                 </Col>
             )}
@@ -135,6 +138,8 @@ const CurrentEvents = () => {
                                     <Link to={`/catalyst/current-events/${thirdArticleIndex}`}>
                                         <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[thirdArticleIndex].articleTitle}</div>
                                     </Link>
+                                    <h1 className='font-bold  mb-2'>by {ArticlesData[thirdArticleIndex].articleAuthor}</h1>
+
                                     <p className="text-gray-700 text-base" 
                                     id="article-content"
                                     style={{ whiteSpace: 'pre-line' }}>
@@ -161,6 +166,8 @@ const CurrentEvents = () => {
                                     <Link to={`/catalyst/current-events/${fourthArticleIndex}`}>
                                         <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[fourthArticleIndex].articleTitle}</div>
                                     </Link>
+                                    <h1 className='font-bold  mb-2'>by {ArticlesData[fourthArticleIndex].articleAuthor}</h1>
+
                                     <p className="text-gray-700 text-base" 
                                     id="article-content"
                                     style={{ whiteSpace: 'pre-line' }}>
@@ -183,7 +190,7 @@ const CurrentEvents = () => {
             ) : (
                 <Col>
                     <div className="rounded overflow-hidden mb-6 h-96">
-                        <p className='text-3xl'>Loading...</p>
+                        <p className='text-md'>Loading...</p>
                     </div>
                 </Col>
             )}
@@ -197,6 +204,8 @@ const CurrentEvents = () => {
                                     <Link to={`/catalyst/current-events/${fifthArticleIndex}`}>
                                         <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[fifthArticleIndex].articleTitle}</div>
                                     </Link>
+                                    <h1 className='font-bold  mb-2'>by {ArticlesData[fifthArticleIndex].articleAuthor}</h1>
+
                                     <p className="text-gray-700 text-base"
                                     id="article-content"
                                      style={{ whiteSpace: 'pre-line' }}>
@@ -223,6 +232,8 @@ const CurrentEvents = () => {
                                     <Link to={`/catalyst/current-events/${sixthArticleIndex}`}>
                                         <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[sixthArticleIndex].articleTitle}</div>
                                     </Link>
+                                    <h1 className='font-bold  mb-2'>by {ArticlesData[sixthArticleIndex].articleAuthor}</h1>
+
                                     <p className="text-gray-700 text-base" 
                                     id="article-content"
                                     style={{ whiteSpace: 'pre-line' }}>
@@ -245,7 +256,7 @@ const CurrentEvents = () => {
             ) : (
                 <Col>
                     <div className="rounded overflow-hidden mb-6 h-96">
-                        <p className='text-3xl'>Loading...</p>
+                        <p className='text-md'>Loading...</p>
                     </div>
                 </Col>
             )}
@@ -259,6 +270,8 @@ const CurrentEvents = () => {
                                 <Link to={`/catalyst/current-events/${seventhArticleIndex}`}>
                                     <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[seventhArticleIndex].articleTitle}</div>
                                 </Link>
+                                <h1 className='font-bold  mb-2'>by {ArticlesData[seventhArticleIndex].articleAuthor}</h1>
+
                                 <div className='flex  lg:flex-row flex-col'>
                                     <img
                                         className="md:w-72 h-64 object-cover"
@@ -286,6 +299,8 @@ const CurrentEvents = () => {
                                 <Link to={`/catalyst/current-events/${eighthArticleIndex}`}>
                                     <div className="font-bold text-3xl mb-2 hover:text-gray-600" id='article-title'>{ArticlesData[eighthArticleIndex].articleTitle}</div>
                                 </Link>
+                                <h1 className='font-bold  mb-2'>by {ArticlesData[eighthArticleIndex].articleAuthor}</h1>
+
                                 <div className='flex lg:flex-row flex-col'>
                                     <img
                                         className="md:w-72 h-64 object-cover"
@@ -309,7 +324,7 @@ const CurrentEvents = () => {
             ) : (
                 <Col>
                     <div className="rounded overflow-hidden mb-6 h-96">
-                        <p className='text-3xl'>Loading...</p>
+                        <p className='text-md'>Loading...</p>
                     </div>
                 </Col>
             )}

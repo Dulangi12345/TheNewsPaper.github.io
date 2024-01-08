@@ -6,6 +6,7 @@ import ManageTravelAndLifestyle from './ManageTravelAndLifestyle';
 import ManageArtsAndCulture from './ManageArtsAndCulture';
 import ManageCurrentEvents from './ManageCurrentEvents';
 import ManageWellbeingCorner from './ManageWellbeingCorner';
+import ManageApiitEvents from './ManageApiitEvents';
 
 const ManageArticles = () => {
     const [selectedOption, setSelectedOption] = useState('homepage');
@@ -20,6 +21,8 @@ const ManageArticles = () => {
                 return <ManageHomepage />
             case 'currentEvent':
                 return <ManageCurrentEvents />
+            case 'apiitEvent':
+                return <ManageApiitEvents />
             case 'scienceAndTechnology':
                 return <ManageScienceAndTechnology />
             case 'travelAndLifestyle':
@@ -47,6 +50,7 @@ const ManageArticles = () => {
                 >
                     <option value="homepage">Homepage</option>
                     <option value="currentEvent">Current Events</option>
+                    <option value="apiitEvent">Apiit Events</option>
                     <option value="scienceAndTechnology">Science and Technology</option>
                     <option value="travelAndLifestyle">Travel and Lifestyle</option>
                     <option value="wellbeingCorner">Wellbeing Corner</option>

@@ -8,9 +8,9 @@ import { ref, uploadBytesResumable, getDownloadURL, deleteObject, uploadBytes } 
 const ManageWellbeingCorner = () => {
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [articleData, setArticleData] = useState({ articleTitle: '', articleDescription: '', articleImage: '' });
+    const [articleData, setArticleData] = useState({ articleTitle: '', articleAuthor:'' , articleDescription: '', articleImage: '' });
     const [Loading, setLoading] = useState(true);
-    const [articleToEdit, setArticleToEdit] = useState({ articleTitle: '', articleDescription: '', articleImage: '' });
+    const [articleToEdit, setArticleToEdit] = useState({ articleTitle: '', articleAuthor:'' , articleDescription: '', articleImage: '' });
     const [isSaving, setIsSaving] = useState(false);
     const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
 
@@ -55,7 +55,7 @@ const ManageWellbeingCorner = () => {
         const docReference = doc(db, 'Catalyst', 'wellbeingCorner');
 
         try {
-            if (articleToEdit.articleTitle && articleToEdit.articleDescription) {
+            if (articleToEdit.articleTitle &&  articleToEdit.articleAuthor && articleToEdit.articleDescription) {
                 let oldImageURL = null; // Initialize oldImageURL
 
                 // Check if there was a previous image and set oldImageURL accordingly
@@ -73,6 +73,7 @@ const ManageWellbeingCorner = () => {
 
                 const newArticleData = {
                     articleTitle: articleToEdit.articleTitle,
+                    articleAuthor: articleToEdit.articleAuthor,
                     articleDescription: articleToEdit.articleDescription,
                     articleImage: imageURL,
                     timestamp: serverTimestamp(),
@@ -93,7 +94,7 @@ const ManageWellbeingCorner = () => {
                 await setDoc(docReference, newArticleData, { merge: true });
 
                 setIsModalOpen(false);
-                setArticleToEdit({ articleTitle: '', articleDescription: '', articleImage: '' });
+                setArticleToEdit({ articleTitle: '', articleAuthor:'' , articleDescription: '', articleImage: '' });
                 setError('');
             } else {
                 setError('Fields cannot be empty. Please fill in all the details.');
@@ -127,6 +128,7 @@ const ManageWellbeingCorner = () => {
         const docReference = doc(db, 'Catalyst', 'wellbeingCorner');
         const updatedData = {
                 articleTitle: 'Title',
+                articleAuthor: 'Author',
                 articleDescription: 'This is the Article Description and by clicking on the edit button you can edit the article description and save it.',
                 articleImage: 'This is the image URL',
                 timestamp: serverTimestamp(),
@@ -159,6 +161,9 @@ const ManageWellbeingCorner = () => {
                                     ></i>
                                 </div>
                             </div>
+                            <h3 className=" text-xl italic mb-10">
+                                   by {articleData.articleAuthor}
+                            </h3>
                             <img src={articleData.articleImage} alt="WellBeing Corner Image" className="w-full h-96 object-cover mt-4" />
                             <p className="text-gray-700 text-base w-[1350px] mt-14" style={{ whiteSpace: 'pre-line' }}>{articleData.articleDescription}</p>
 
@@ -196,6 +201,23 @@ const ManageWellbeingCorner = () => {
                                         style={{ width: "100%" }}
                                     />
                                 </div>
+
+                                <div className="mb-4">
+                                    <label htmlFor="author" className="block text-gray-700 text-sm font-bold mb-2">
+                                        Author
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="author"
+                                        value={articleToEdit.articleAuthor}
+                                        onChange={(e) => setArticleToEdit({ ...articleToEdit, articleAuthor: e.target.value })}
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        placeholder="Enter author name"
+                                        required
+                                        style={{ width: "100%" }}
+                                    />
+                                </div>
+
                                 <div className="mb-4">
                                     <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
                                         Description

@@ -32,43 +32,6 @@
 }
 
 
-/* #section-xyz{
-   
-}
-
-#description-section {
-   display: block;
-   background-color: white;
-  
-   
-} */
-
-
-/* #kagura-CTT-description{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
- 
-  
-} */
-
-#kagura-section{
-  background-color: #E96479;
- 
-}
-
-#CTT-section{
-  background-color: #F5E9CF;
- 
-}
-
-
-#Catalyst-section{
-  background-color: #54d2b5;
- 
-  
-}
-
 
 
 
@@ -95,7 +58,6 @@
     transition: opacity 2.5s ease, transform 2.5s ease;
   }
   
-  /* Apply the animation when the card is in the viewport */
    #Catalyst-section.in-view {
     animation: fadeInUp 2.5s forwards;
   }
@@ -121,7 +83,6 @@
     transition: opacity 2.5s ease, transform 2.5s ease;
   }
   
-  /* Apply the animation when the card is in the viewport */
    #kagura-section.in-view {
     animation: fadeInUp 2.5s forwards;
   }
@@ -144,7 +105,6 @@
     transition: opacity 2.5s ease, transform 2.5s ease;
   }
   
-  /* Apply the animation when the card is in the viewport */
    #CTT-section.in-view {
     animation: fadeInUp 2.5s forwards;
   }
@@ -172,10 +132,9 @@
 
   #anime-name {
     font-family: 'IBM Plex Sans', sans-serif;
-
-
-
-  }
+    background-color: #000;
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.2);
+}
 
 
   #anime-content{
@@ -199,7 +158,6 @@
   transition: opacity 2.5s ease, transform 2.5s ease;
 }
 
-/* Apply the animation when the card is in the viewport */
  #anime-image.in-view {
   animation: fadeInUp 2.5s forwards;
 }
@@ -229,9 +187,10 @@
 
 #quiz-Content{
   font-family: 'IBM Plex Sans', sans-serif;
-  background-image: url('assets/QuizBG.png');
-  background-size: cover;
+  background-image: url('assets/animeBG.png');
+  background-size: contain;
   background-repeat: no-repeat;
+  padding: 20px;
 
 }
 
@@ -283,3 +242,35 @@
 .delay-3 {
   animation-delay: 1.5s;
 }
+
+
+
+@keyframes example {
+  0% {
+    width: 0%;
+  }
+
+  10% {
+    width: 0%;
+  }
+
+  100% {
+    max-width: 100%;
+  }
+}
+
+/* #section {
+  border-radius: 1px 25px 25px 1px;
+  padding: 16px;
+  background-color: #7ac1cf;
+  position: relative;
+  margin-bottom: -32px;
+  z-index: 2;
+  animation-duration: 6s;
+}
+
+
+#section.animate {
+  animation-name: example;
+}
+ */

@@ -5,7 +5,7 @@ import Footer from '../../layout/footer';
 
 
 const CatalystHomepage = () => {
-    const [articleData, setArticleData] = useState({ articleTitle: '', articleDescription: '', articleImage: '' });
+    const [articleData, setArticleData] = useState({ articleTitle: '', articleDescription: '', articleImage: ''  , articleAuthor : ''});
     const [Loading, setLoading] = useState(true);
 
     const fetchArticleData = async () => {
@@ -31,8 +31,10 @@ const CatalystHomepage = () => {
 
     return (
         <div>
-            <div className='mx-32 mt-10'>
                 {Loading == false ? (
+                <div>
+                   <div className='mx-32 mt-10'>
+
                     <div className="flex flex-wrap">
                         <div className="p-2">
                             <div className="rounded-md p-4">
@@ -40,7 +42,7 @@ const CatalystHomepage = () => {
                                     <h2 className="text-5xl font-bold text-center  mb-3" id="article-title">{articleData.articleTitle}</h2>
                                 </div>
                                 <h3 className=" text-xl italic text-center mb-10">
-                                    by Shelly Adams
+                                    {articleData.articleAuthor}
                                 </h3>
                                 <img src={articleData.articleImage} alt="Homepage Image" className="w-full h-[800px] object-fill mt-4" />
                                 <p className="text-gray-700 mt-14 text-xl"
@@ -49,16 +51,23 @@ const CatalystHomepage = () => {
 
                             </div>
                         </div>
-
+          
                     </div>
+                    
+                    </div>
+                    <Footer />
+                    </div>
+               
+                             
+                    
                 ) : (
                     <div className="flex items-center justify-center">
-                        <p className='text-3xl'>Loading...</p>
+                        <p className='text-md'>Loading...</p>
                     </div>
                 )}
-            </div>
+          
 
-            <Footer />
+          
         </div>
     );
 };
