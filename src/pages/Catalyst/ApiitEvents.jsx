@@ -14,14 +14,9 @@ const truncateString = (str, num) => {
   }
 };
 
-const TravelAndLifestyle = () => {
+const ApiitEvents = () => {
   const [ArticlesData, setArticlesData] = useState([
-    {
-      articleTitle: "",
-      articleAuthor: "",
-      articleDescription: "",
-      articleImage: "",
-    },
+    { articleTitle: "", articleAuthor: "" , articleDescription: "", articleImage: "" },
   ]);
   const [Loading, setLoading] = useState(true);
 
@@ -40,7 +35,7 @@ const TravelAndLifestyle = () => {
 
   const fetchArticleData = async () => {
     try {
-      const docRef = doc(db, "Catalyst", "travelAndLifestyle");
+      const docRef = doc(db, "Catalyst", "ApiitEvents");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const data = docSnap.data();
@@ -70,10 +65,10 @@ const TravelAndLifestyle = () => {
           <Row>
             <Col md={8}>
               <div className="rounded overflow-hidden mb-6">
-                <div className="px-6 py-4 flex items-center flex lg:flex-row flex-col">
+                <div className="px-6 py-4 flex items-center flex lg:flex-row flex-col ">
                   <div>
                     <Link
-                      to={`/catalyst/travel-and-lifestyle/${firstArticleIndex}`}
+                      to={`/catalyst/apiit-events/${firstArticleIndex}`}
                     >
                       <div
                         className="font-bold text-3xl mb-2 hover:text-gray-600"
@@ -82,9 +77,7 @@ const TravelAndLifestyle = () => {
                         {ArticlesData[firstArticleIndex].articleTitle}
                       </div>
                     </Link>
-                    <h1 className="font-bold  mb-2">
-                      by {ArticlesData[firstArticleIndex].articleAuthor}
-                    </h1>
+                    <h1 className='font-bold  mb-2'>by {ArticlesData[firstArticleIndex].articleAuthor}</h1>
 
                     <p
                       className="text-gray-700 text-base"
@@ -96,13 +89,14 @@ const TravelAndLifestyle = () => {
                         590
                       )}
                       <Link
-                        to={`/catalyst/travel-and-lifestyle/${firstArticleIndex}`}
+                        to={`/catalyst/apiit-events/${firstArticleIndex}`}
                         className="text-blue-500"
                       >
                         Read More
                       </Link>
                     </p>
                   </div>
+                  
                   <img
                     className="md:w-80 h-52 ml-4 object-cover"
                     src={ArticlesData[firstArticleIndex].articleImage}
@@ -115,10 +109,10 @@ const TravelAndLifestyle = () => {
 
             <Col md={4}>
               <div className="rounded overflow-hidden mb-6">
-                <div className="px-6 py-4 items-center ">
+                <div className="px-6 py-4 items-center">
                   <div>
                     <Link
-                      to={`/catalyst/travel-and-lifestyle/${secondArticleIndex}`}
+                      to={`/catalyst/apiit-events/${secondArticleIndex}`}
                     >
                       <div
                         className="font-bold text-3xl mb-2 hover:text-gray-600"
@@ -127,9 +121,7 @@ const TravelAndLifestyle = () => {
                         {ArticlesData[secondArticleIndex].articleTitle}
                       </div>
                     </Link>
-                    <h1 className="font-bold  mb-2">
-                      by {ArticlesData[secondArticleIndex].articleAuthor}
-                    </h1>
+                    <h1 className='font-bold  mb-2'>by {ArticlesData[secondArticleIndex].articleAuthor}</h1>
 
                     <p
                       className="text-gray-700 text-base"
@@ -141,7 +133,7 @@ const TravelAndLifestyle = () => {
                         300
                       )}
                       <Link
-                        to={`/catalyst/travel-and-lifestyle/${secondArticleIndex}`}
+                        to={`/catalyst/apiit-events/${secondArticleIndex}`}
                         className="text-blue-500"
                       >
                         Read More
@@ -160,7 +152,7 @@ const TravelAndLifestyle = () => {
         ) : (
           <Col>
             <div className="rounded overflow-hidden mb-6 h-96">
-              <p className="text-md">Loading...</p>
+              <p className="text-3xl">Loading...</p>
             </div>
           </Col>
         )}
@@ -171,10 +163,10 @@ const TravelAndLifestyle = () => {
           <Row>
             <Col md={8}>
               <div className="rounded overflow-hidden mb-6">
-                <div className="px-6 py-4 flex items-center flex lg:flex-row flex-col">
+                <div className="px-6 py-4 flex items-center flex lg:flex-row flex-col ">
                   <div>
                     <Link
-                      to={`/catalyst/travel-and-lifestyle/${thirdArticleIndex}`}
+                      to={`/catalyst/apiit-events/${thirdArticleIndex}`}
                     >
                       <div
                         className="font-bold text-3xl mb-2 hover:text-gray-600"
@@ -183,9 +175,7 @@ const TravelAndLifestyle = () => {
                         {ArticlesData[thirdArticleIndex].articleTitle}
                       </div>
                     </Link>
-                    <h1 className="font-bold  mb-2">
-                      by {ArticlesData[thirdArticleIndex].articleAuthor}
-                    </h1>
+                    <h1 className='font-bold  mb-2'>by {ArticlesData[thirdArticleIndex].articleAuthor}</h1>
 
                     <p
                       className="text-gray-700 text-base"
@@ -197,7 +187,7 @@ const TravelAndLifestyle = () => {
                         600
                       )}
                       <Link
-                        to={`/catalyst/travel-and-lifestyle/${thirdArticleIndex}`}
+                        to={`/catalyst/apiit-events/${thirdArticleIndex}`}
                         className="text-blue-500"
                       >
                         Read More
@@ -219,7 +209,7 @@ const TravelAndLifestyle = () => {
                 <div className="px-6 py-4 items-center">
                   <div>
                     <Link
-                      to={`/catalyst/travel-and-lifestyle/${fourthArticleIndex}`}
+                      to={`/catalyst/apiit-events/${fourthArticleIndex}`}
                     >
                       <div
                         className="font-bold text-3xl mb-2 hover:text-gray-600"
@@ -228,9 +218,7 @@ const TravelAndLifestyle = () => {
                         {ArticlesData[fourthArticleIndex].articleTitle}
                       </div>
                     </Link>
-                    <h1 className="font-bold  mb-2">
-                      by {ArticlesData[fourthArticleIndex].articleAuthor}
-                    </h1>
+                    <h1 className='font-bold  mb-2'>by {ArticlesData[fourthArticleIndex].articleAuthor}</h1>
 
                     <p
                       className="text-gray-700 text-base"
@@ -242,7 +230,7 @@ const TravelAndLifestyle = () => {
                         300
                       )}
                       <Link
-                        to={`/catalyst/travel-and-lifestyle/${fourthArticleIndex}`}
+                        to={`/catalyst/apiit-events/${fourthArticleIndex}`}
                         className="text-blue-500"
                       >
                         Read More
@@ -261,7 +249,7 @@ const TravelAndLifestyle = () => {
         ) : (
           <Col>
             <div className="rounded overflow-hidden mb-6 h-96">
-              <p className="text-md">Loading...</p>
+              <p className="text-3xl">Loading...</p>
             </div>
           </Col>
         )}
@@ -272,10 +260,10 @@ const TravelAndLifestyle = () => {
           <Row>
             <Col md={8}>
               <div className="rounded overflow-hidden mb-6">
-                <div className="px-6 py-4 flex items-center flex lg:flex-row flex-col">
+                <div className="px-6 py-4 flex items-center flex lg:flex-row flex-col ">
                   <div>
                     <Link
-                      to={`/catalyst/travel-and-lifestyle/${fifthArticleIndex}`}
+                      to={`/catalyst/apiit-events/${fifthArticleIndex}`}
                     >
                       <div
                         className="font-bold text-3xl mb-2 hover:text-gray-600"
@@ -284,9 +272,7 @@ const TravelAndLifestyle = () => {
                         {ArticlesData[fifthArticleIndex].articleTitle}
                       </div>
                     </Link>
-                    <h1 className="font-bold  mb-2">
-                      by {ArticlesData[fifthArticleIndex].articleAuthor}
-                    </h1>
+                    <h1 className='font-bold  mb-2'>by {ArticlesData[fifthArticleIndex].articleAuthor}</h1>
 
                     <p
                       className="text-gray-700 text-base"
@@ -298,7 +284,7 @@ const TravelAndLifestyle = () => {
                         600
                       )}
                       <Link
-                        to={`/catalyst/travel-and-lifestyle/${fifthArticleIndex}`}
+                        to={`/catalyst/apiit-events/${fifthArticleIndex}`}
                         className="text-blue-500"
                       >
                         Read More
@@ -320,7 +306,7 @@ const TravelAndLifestyle = () => {
                 <div className="px-6 py-4 items-center">
                   <div>
                     <Link
-                      to={`/catalyst/travel-and-lifestyle/${sixthArticleIndex}`}
+                      to={`/catalyst/apiit-events/${sixthArticleIndex}`}
                     >
                       <div
                         className="font-bold text-3xl mb-2 hover:text-gray-600"
@@ -329,9 +315,7 @@ const TravelAndLifestyle = () => {
                         {ArticlesData[sixthArticleIndex].articleTitle}
                       </div>
                     </Link>
-                    <h1 className="font-bold  mb-2">
-                      by {ArticlesData[sixthArticleIndex].articleAuthor}
-                    </h1>
+                    <h1 className='font-bold  mb-2'>by {ArticlesData[sixthArticleIndex].articleAuthor}</h1>
 
                     <p
                       className="text-gray-700 text-base"
@@ -343,7 +327,7 @@ const TravelAndLifestyle = () => {
                         300
                       )}
                       <Link
-                        to={`/catalyst/travel-and-lifestyle/${sixthArticleIndex}`}
+                        to={`/catalyst/apiit-events/${sixthArticleIndex}`}
                         className="text-blue-500"
                       >
                         Read More
@@ -362,7 +346,7 @@ const TravelAndLifestyle = () => {
         ) : (
           <Col>
             <div className="rounded overflow-hidden mb-6 h-96">
-              <p className="text-md">Loading...</p>
+              <p className="text-3xl">Loading...</p>
             </div>
           </Col>
         )}
@@ -375,7 +359,7 @@ const TravelAndLifestyle = () => {
               <div className="rounded overflow-hidden mb-6 lg:border-r-2 pr-4">
                 <div className="px-6 py-4 items-center ">
                   <Link
-                    to={`/catalyst/travel-and-lifestyle/${seventhArticleIndex}`}
+                    to={`/catalyst/apiit-events/${seventhArticleIndex}`}
                   >
                     <div
                       className="font-bold text-3xl mb-2 hover:text-gray-600"
@@ -384,9 +368,8 @@ const TravelAndLifestyle = () => {
                       {ArticlesData[seventhArticleIndex].articleTitle}
                     </div>
                   </Link>
-                  <h1 className="font-bold  mb-2">
-                    by {ArticlesData[seventhArticleIndex].articleAuthor}
-                  </h1>
+                  <h1 className='font-bold  mb-2'>by {ArticlesData[seventhArticleIndex].articleAuthor}</h1>
+
 
                   <div className="flex  lg:flex-row flex-col">
                     <img
@@ -394,6 +377,7 @@ const TravelAndLifestyle = () => {
                       src={ArticlesData[seventhArticleIndex].articleImage}
                       alt="Current Event"
                     />
+
                     <p
                       className="text-gray-700 text-base ml-4"
                       id="article-content"
@@ -404,7 +388,7 @@ const TravelAndLifestyle = () => {
                         500
                       )}
                       <Link
-                        to={`/catalyst/travel-and-lifestyle/${seventhArticleIndex}`}
+                        to={`/catalyst/apiit-events/${seventhArticleIndex}`}
                         className="text-blue-500"
                       >
                         Read More
@@ -419,7 +403,7 @@ const TravelAndLifestyle = () => {
               <div className="rounded overflow-hidden mb-6">
                 <div className="px-6 py-4 items-center">
                   <Link
-                    to={`/catalyst/travel-and-lifestyle/${eighthArticleIndex}`}
+                    to={`/catalyst/apiit-events/${eighthArticleIndex}`}
                   >
                     <div
                       className="font-bold text-3xl mb-2 hover:text-gray-600"
@@ -428,9 +412,7 @@ const TravelAndLifestyle = () => {
                       {ArticlesData[eighthArticleIndex].articleTitle}
                     </div>
                   </Link>
-                  <h1 className="font-bold  mb-2">
-                    by {ArticlesData[eighthArticleIndex].articleAuthor}
-                  </h1>
+                  <h1 className='font-bold  mb-2'>by {ArticlesData[eighthArticleIndex].articleAuthor}</h1>
 
                   <div className="flex  lg:flex-row flex-col">
                     <img
@@ -438,6 +420,7 @@ const TravelAndLifestyle = () => {
                       src={ArticlesData[eighthArticleIndex].articleImage}
                       alt="Current Event"
                     />
+                    
                     <p
                       className="text-gray-700 text-base ml-4"
                       id="article-content"
@@ -448,7 +431,7 @@ const TravelAndLifestyle = () => {
                         500
                       )}
                       <Link
-                        to={`/catalyst/travel-and-lifestyle/${eighthArticleIndex}`}
+                        to={`/catalyst/apiit-events/${eighthArticleIndex}`}
                         className="text-blue-500"
                       >
                         Read More
@@ -467,9 +450,10 @@ const TravelAndLifestyle = () => {
           </Col>
         )}
       </div>
+
       <Footer />
     </div>
   );
 };
 
-export default TravelAndLifestyle;
+export default ApiitEvents;

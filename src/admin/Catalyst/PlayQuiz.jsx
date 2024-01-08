@@ -114,7 +114,7 @@ const PlayQuiz = () => {
 
         try {
             setScore(prevScore => prevScore + 1);
-            console.log('score ', score + 1);
+            // console.log('score ', score + 1);
            
             
 
@@ -139,7 +139,7 @@ const PlayQuiz = () => {
                 setCorrectAnswerIndices(quizData.questions.map(question => question.answers[question.correctAnswerIndex]));
                 setQuestionCount(quizData.questions.length);
                 setQuizName(quizName);
-                console.log('Fetched quiz questions:', quizData.questions, correctAnswerIndices);
+                // console.log('Fetched quiz questions:', quizData.questions, correctAnswerIndices);
             }
         } catch (error) {
             console.log('Error fetching quiz:', error);
@@ -163,7 +163,7 @@ const PlayQuiz = () => {
     // }, [correctAnswerIndices]);
 
     return (
-        <div className="flex lg:flex-row flex-col gap-8 ">
+        <div className="flex lg:flex-row flex-col gap-8 m-10">
 
 
 
@@ -274,7 +274,8 @@ const PlayQuiz = () => {
                         {quizQuestions.length > 0 && currentQuestionIndex === quizQuestions.length && (
                             <div>
                                 <h1 className="font-bold text-5xl ">Quiz Completed !</h1>
-                                <h1 className="font-bold text-3xl ">Your score is {score}</h1>
+                                <h1 className="font-bold text-3xl ">Your score is {score}/ {questionCount}
+                                </h1>
                                 <button 
                                 className="bg-[#4D455D] text-white rounded-full w-44 h-16 m-4  hover:bg-[#E96479] hover:shadow-lg hover:translate-y-2 "
                                 onClick={replayQuiz}>Replay Quiz</button>

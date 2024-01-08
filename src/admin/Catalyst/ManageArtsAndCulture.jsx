@@ -17,9 +17,9 @@ const ManageArtsAndCulture = () => {
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [ArticlesData, setArticlesData] = useState([
-        { articleTitle: '', articleDescription: '', articleImage: '' },
+        { articleTitle: '', articleAuthor:'' ,  articleDescription: '', articleImage: '' },
     ]);
-    const [articleToEdit, setArticleToEdit] = useState({ articleTitle: '', articleDescription: '', articleImage: '', index: null });
+    const [articleToEdit, setArticleToEdit] = useState({ articleTitle: '', articleAuthor:'' , articleDescription: '', articleImage: '', index: null });
     const [isSaving, setIsSaving] = useState(false);
     const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
     const [articleToDelete, setArticleToDelete] = useState(null);
@@ -91,6 +91,7 @@ const ManageArtsAndCulture = () => {
             if (
                 articleToEdit.index !== null &&
                 articleToEdit.articleTitle &&
+                articleToEdit.articleAuthor &&
                 articleToEdit.articleDescription &&
                 articleToEdit.articleImage
             ) {
@@ -112,6 +113,7 @@ const ManageArtsAndCulture = () => {
                 const newArticleData = {
                     articleIndex: articleToEdit.index,
                     articleTitle: articleToEdit.articleTitle,
+                    articleAuthor: articleToEdit.articleAuthor,
                     articleDescription: articleToEdit.articleDescription,
                     articleImage: imageURL,
                     timestamp: serverTimestamp(),
@@ -146,7 +148,7 @@ const ManageArtsAndCulture = () => {
 
                 setIsModalOpen(false);
                 setError('');
-                setArticleToEdit({ articleTitle: '', articleDescription: '', articleImage: '', index: null });
+                setArticleToEdit({ articleTitle: '', articleAuthor:'' , articleDescription: '', articleImage: '', index: null });
             } else {
                 setError('Fields cannot be empty. Please fill in all the details.');
             }
@@ -179,6 +181,7 @@ const ManageArtsAndCulture = () => {
         const updatedData = {
             [articleToDelete]: {
                 articleTitle: 'Title',
+                articleAuthor: 'Author',
                 articleDescription: 'This is the Article Description and by clicking on the edit button you can edit the article description and save it.',
                 articleImage: 'This is the image URL',
                 timestamp: serverTimestamp(),
@@ -203,6 +206,9 @@ const ManageArtsAndCulture = () => {
                             <div className="px-6 py-4 flex items-center">
                                 <div>
                                     <div className="font-bold text-xl mb-2">{ArticlesData[firstArticleIndex].articleTitle}</div>
+                                    <h1 className='font-bold  mb-2'>by {ArticlesData[firstArticleIndex].articleAuthor}</h1>
+
+
                                     <p className="text-gray-700 text-base" style={{ whiteSpace: 'pre-line' }}>
                                         {truncateString(ArticlesData[firstArticleIndex].articleDescription, 600)}
                                     </p>
@@ -229,6 +235,8 @@ const ManageArtsAndCulture = () => {
                             <div className="px-6 py-4 items-center">
                                 <div>
                                     <div className="font-bold text-xl mb-2">{ArticlesData[secondArticleIndex].articleTitle}</div>
+                                    <h1 className='font-bold  mb-2'>by {ArticlesData[secondArticleIndex].articleAuthor}</h1>
+
                                     <p className="text-gray-700 text-base" style={{ whiteSpace: 'pre-line' }}>
                                         {truncateString(ArticlesData[secondArticleIndex].articleDescription, 300)}
                                     </p>
@@ -266,6 +274,8 @@ const ManageArtsAndCulture = () => {
                             <div className="px-6 py-4 flex items-center">
                                 <div>
                                     <div className="font-bold text-xl mb-2">{ArticlesData[thirdArticleIndex].articleTitle}</div>
+                                    <h1 className='font-bold  mb-2'>by {ArticlesData[thirdArticleIndex].articleAuthor}</h1>
+
                                     <p className="text-gray-700 text-base" style={{ whiteSpace: 'pre-line' }}>
                                         {truncateString(ArticlesData[thirdArticleIndex].articleDescription, 600)}
                                     </p>
@@ -294,6 +304,8 @@ const ManageArtsAndCulture = () => {
                             <div className="px-6 py-4 items-center">
                                 <div>
                                     <div className="font-bold text-xl mb-2">{ArticlesData[fourthArticleIndex].articleTitle}</div>
+                                    <h1 className='font-bold  mb-2'>by {ArticlesData[fourthArticleIndex].articleAuthor}</h1>
+
                                     <p className="text-gray-700 text-base" style={{ whiteSpace: 'pre-line' }}>
                                         {truncateString(ArticlesData[fourthArticleIndex].articleDescription, 300)}
                                     </p>
@@ -331,6 +343,8 @@ const ManageArtsAndCulture = () => {
                             <div className="px-6 py-4 flex items-center">
                                 <div>
                                     <div className="font-bold text-xl mb-2">{ArticlesData[fifthArticleIndex].articleTitle}</div>
+                                    <h1 className='font-bold  mb-2'>by {ArticlesData[fifthArticleIndex].articleAuthor}</h1>
+
                                     <p className="text-gray-700 text-base" style={{ whiteSpace: 'pre-line' }}>
                                         {truncateString(ArticlesData[fifthArticleIndex].articleDescription, 600)}
                                     </p>
@@ -359,6 +373,8 @@ const ManageArtsAndCulture = () => {
                             <div className="px-6 py-4 items-center">
                                 <div>
                                     <div className="font-bold text-xl mb-2">{ArticlesData[sixthArticleIndex].articleTitle}</div>
+                                    <h1 className='font-bold  mb-2'>by {ArticlesData[sixthArticleIndex].articleAuthor}</h1>
+
                                     <p className="text-gray-700 text-base" style={{ whiteSpace: 'pre-line' }}>
                                         {truncateString(ArticlesData[sixthArticleIndex].articleDescription, 300)}
                                     </p>
@@ -396,6 +412,8 @@ const ManageArtsAndCulture = () => {
                             <div className="px-6 py-4 items-center">
 
                                 <div className="font-bold text-xl mb-2">{ArticlesData[seventhArticleIndex].articleTitle}</div>
+                                <h1 className='font-bold  mb-2'>by {ArticlesData[seventhArticleIndex].articleAuthor}</h1>
+
                                 <div className='flex'>
                                     <img
                                         className="md:w-72 h-64 object-cover"
@@ -425,6 +443,8 @@ const ManageArtsAndCulture = () => {
                             <div className="px-6 py-4 items-center">
 
                                 <div className="font-bold text-xl mb-2">{ArticlesData[eighthArticleIndex].articleTitle}</div>
+                                <h1 className='font-bold  mb-2'>by {ArticlesData[eighthArticleIndex].articleAuthor}</h1>
+
                                 <div className='flex'>
                                     <img
                                         className="md:w-72 h-64 object-cover"
@@ -475,6 +495,21 @@ const ManageArtsAndCulture = () => {
                                         onChange={(e) => setArticleToEdit({ ...articleToEdit, articleTitle: e.target.value })}
                                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         placeholder="Enter title"
+                                        required
+                                        style={{ width: "100%" }}
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label htmlFor="author" className="block text-gray-700 text-sm font-bold mb-2">
+                                        Author
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="author"
+                                        value={articleToEdit.articleAuthor}
+                                        onChange={(e) => setArticleToEdit({ ...articleToEdit, articleAuthor: e.target.value })}
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        placeholder="Enter author"
                                         required
                                         style={{ width: "100%" }}
                                     />

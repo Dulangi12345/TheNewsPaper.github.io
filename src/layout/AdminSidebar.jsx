@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from "../pages/auth/AuthProvider";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const AdminSidebar = () => {
+
+    const { isLoggedIn , logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const isHomepage = location.pathname === '/';
+
+
+
     return (
         <div className="min-h-screen antialiased bg-gray-50 text-gray-800">
             <div className="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r">
@@ -105,14 +116,35 @@ const AdminSidebar = () => {
                                 <span className="ml-2 text-sm tracking-wide truncate">Profile</span>
                             </a>
                         </li>
-                        <li>
+                        {/* <li>
                             <a href="#" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                                 <span className="inline-flex justify-center items-center ml-4">
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                                 </span>
                                 <span className="ml-2 text-sm tracking-wide truncate">Logout</span>
                             </a>
-                        </li>
+                        </li> */}
+                        {
+                            isLoggedIn && (
+                                <li
+                                className='cursor-pointer relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6'
+                                onClick={
+                                    () => {
+                                        logout();
+                                        navigate('/');
+                                    }
+                                }
+                                >
+                                     <span className="inline-flex justify-center items-center ml-4">
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                                </span>
+                                <span className="ml-2 text-sm tracking-wide truncate">Logout</span>
+
+                                   
+                                </li>
+                            ) 
+                             
+                        }
                     </ul>
                 </div>
             </div>

@@ -60,7 +60,7 @@ const DropdownMenu = () => {
         <div className="relative">
             <button
                 id="dropdownDefaultButton"
-                className="text-black focus:outline-none  rounded-lg   py-2.5 text-center inline-flex items-center hover:underline block rounded-md px-3 py-2 text-base font-bold"
+                className=" focus:outline-none  rounded-lg    text-center inline-flex items-center hover:underline block rounded-md px-3 py-1  font-bold"
                 type="button"
                 onClick={toggleDropdown} // Toggle dropdown visibility on button click
             >

@@ -7,7 +7,7 @@ import Footer from '../../layout/footer';
 const FullArticle = () => {
     const [error, setError] = useState('');
     const { articlePage, articleIndex } = useParams();
-    const [articleData, setArticleData] = useState({ articleTitle: '', articleDescription: '', articleImage: '' });
+    const [articleData, setArticleData] = useState({ articleTitle: '', articleAuthor: '' , articleDescription: '', articleImage: '' });
     const [loading, setLoading] = useState(true);
     const [articlePageDBName, setArticlePageDBName] = useState('');
 
@@ -20,7 +20,10 @@ const FullArticle = () => {
             setArticlePageDBName('scienceAndTech');
         } else if (articlePage === 'travel-and-lifestyle') {
             setArticlePageDBName('travelAndLifestyle');
-        } else {
+        } else if (articlePage === 'apiit-events'){
+            setArticlePageDBName('ApiitEvents');
+        }
+        else {
             setArticlePageDBName('');
         }
     }, [articlePage]); // Add articlePage as a dependency
@@ -55,7 +58,7 @@ const FullArticle = () => {
             <div className='mx-32 mt-10'>
                 {loading ? (
                     <div className="flex items-center justify-center">
-                        <p className='text-3xl'>Loading...</p>
+                        <p className='text-md'>Loading...</p>
                     </div>
                 ) : (
                     <div>
@@ -71,7 +74,7 @@ const FullArticle = () => {
                                     <h2 className="text-5xl font-bold text-center  mb-3" id="article-title">{articleData[articleIndex].articleTitle}</h2>
                                 </div>
                                 <h3 className=" text-xl italic text-center mb-10">
-                                    by Shelly Adams
+                                    by {articleData[articleIndex].articleAuthor}
                                 </h3>
                                 <img src={articleData[articleIndex].articleImage} alt="Homepage Image" className="w-full h-[800px] object-fill mt-4" />
                                 <p className="text-gray-700 mt-14 text-xl" 

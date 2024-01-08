@@ -58,7 +58,6 @@ window.addEventListener('scroll', function() {
 
 
 
-
 window.addEventListener('scroll', function() {
   var section = document.querySelector('#list-motto');
   var sectionTop = section.getBoundingClientRect().top;
@@ -77,4 +76,19 @@ window.addEventListener('scroll', function() {
   }
 });
 
+const observer = new IntersectionObserver(entries => {
+  intersections.forEach(({
+    target,
+    isIntersecting
+  }) => {
+    if (isIntersecting) {
+      target.classList.add('animate');
+    } else {
+      target.classList.remove('animate');
+    }
+
+  });
+}, {
+  threshold: 0
+});
 

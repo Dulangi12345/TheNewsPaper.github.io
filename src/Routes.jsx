@@ -23,7 +23,8 @@ import FreeArticlePreview from './admin/Catalyst/FreeArticlePreview';
 import AddAnimeCorner from './admin/Catalyst/AddAnimeCorner';
 import AnimeCornerPreview from './admin/Catalyst/AnimeCornerPreview';
 import Quiz from './admin/Catalyst/Quiz';
-
+import ApiitEvents from './pages/Catalyst/ApiitEvents';
+import ManageApiitEvents from './admin/Catalyst/ManageApiitEvents';
 
 import ProtectedRoute from './pages/auth/ProtectedRoute';
 import UnauthorizedPage from './pages/auth/UnauthorizedPage';
@@ -53,6 +54,11 @@ const AppRoutes = () => {
                 path="/catalyst/current-events"
                 element={<ProtectedRoute requiredRole="user" fallbackPath="/login" element={<CurrentEvents />} />}
             />
+             <Route
+                path="/catalyst/apiit-events"
+                element={<ProtectedRoute requiredRole="user" fallbackPath="/login" element={<ApiitEvents />} />}
+            />
+
             <Route
                 path="/catalyst/arts-and-culture"
                 element={<ProtectedRoute requiredRole="user" fallbackPath="/login" element={<ArtsAndCulture />} />}

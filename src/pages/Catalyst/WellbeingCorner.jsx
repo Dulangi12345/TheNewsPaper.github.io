@@ -57,7 +57,7 @@ const WellbeingCorner = () => {
                     </div>
                 ) : (
                     <div className="flex items-center justify-center">
-                        <p className='text-3xl'>Loading...</p>
+                        <p className='text-md'>Loading...</p>
                     </div>
                 )}
             </div>

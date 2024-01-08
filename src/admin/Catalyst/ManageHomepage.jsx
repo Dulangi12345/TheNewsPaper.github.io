@@ -8,9 +8,9 @@ import { ref, uploadBytesResumable, getDownloadURL, deleteObject, uploadBytes } 
 const ManageHomepage = () => {
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [articleData, setArticleData] = useState({ articleTitle: '', articleDescription: '', articleImage: '' });
+    const [articleData, setArticleData] = useState({ articleTitle: '', articleDescription: '', articleImage: '' , articleAuthor: '' });
     const [Loading, setLoading] = useState(true);
-    const [articleToEdit, setArticleToEdit] = useState({ articleTitle: '', articleDescription: '', articleImage: '' });
+    const [articleToEdit, setArticleToEdit] = useState({ articleTitle: '', articleDescription: '', articleImage: '' , articleAuthor: ''});
     const [isSaving, setIsSaving] = useState(false);
     const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
 
@@ -55,7 +55,7 @@ const ManageHomepage = () => {
         const docReference = doc(db, 'Catalyst', 'homepage');
 
         try {
-            if (articleToEdit.articleTitle && articleToEdit.articleDescription) {
+            if (articleToEdit.articleTitle && articleToEdit.articleDescription && articleToEdit.articleAuthor) {
                 let oldImageURL = null; // Initialize oldImageURL
 
                 // Check if there was a previous image and set oldImageURL accordingly
@@ -73,6 +73,7 @@ const ManageHomepage = () => {
 
                 const newArticleData = {
                     articleTitle: articleToEdit.articleTitle,
+                    articleAuthor: articleToEdit.articleAuthor,
                     articleDescription: articleToEdit.articleDescription,
                     articleImage: imageURL,
                     timestamp: serverTimestamp(),
@@ -93,7 +94,7 @@ const ManageHomepage = () => {
                 await setDoc(docReference, newArticleData, { merge: true });
 
                 setIsModalOpen(false);
-                setArticleToEdit({ articleTitle: '', articleDescription: '', articleImage: '' });
+                setArticleToEdit({ articleTitle: '', articleDescription: '', articleImage: '' , articleAuthor: ''});
                 setError('');
             } else {
                 setError('Fields cannot be empty. Please fill in all the details.');
@@ -127,6 +128,7 @@ const ManageHomepage = () => {
         const docReference = doc(db, 'Catalyst', 'homepage');
         const updatedData = {
             articleTitle: 'Title',
+            articleAuthor: 'Author',
             articleDescription: 'This is the Article Description and by clicking on the edit button you can edit the article description and save it.',
             articleImage: 'This is the image URL',
             timestamp: serverTimestamp(),
@@ -148,6 +150,8 @@ const ManageHomepage = () => {
                         <div className="rounded-md p-4">
                             <div className="flex justify-between">
                                 <h2 className="text-3xl mb-3">{articleData.articleTitle}</h2>
+                                
+
                                 <div className="flex">
                                     <i
                                         className="fa fa-trash text-red-500 hover:text-red-700 cursor-pointer absolute top-15 right-12"
@@ -159,7 +163,10 @@ const ManageHomepage = () => {
                                     ></i>
                                 </div>
                             </div>
-                            <img src={articleData.articleImage} alt="Homepage Image" className="w-full h-96 object-cover mt-4" />
+                            <h3 className=" text-xl italic mb-10">
+                                   by {articleData.articleAuthor}
+                                </h3>
+                            <img src={articleData.articleImage} alt="Homepage Image" className="w-full h-96 object-contain mt-4" />
                             <p className="text-gray-700 text-base w-[1350px] mt-14" style={{ whiteSpace: 'pre-line' }}>{articleData.articleDescription}</p>
 
                         </div>
@@ -196,6 +203,25 @@ const ManageHomepage = () => {
                                         style={{ width: "100%" }}
                                     />
                                 </div>
+
+                                <div className="mb-4">
+                                    <label htmlFor="author" className="block text-gray-700 text-sm font-bold mb-2">
+                                        Author
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="author"
+                                        value={articleToEdit.articleAuthor}
+                                        onChange={(e) => setArticleToEdit({ ...articleToEdit, articleAuthor: e.target.value })}
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        placeholder="Enter author"
+                                        required
+                                        style={{ width: "100%" }}
+                                    />
+                                </div>
+
+                                
+
                                 <div className="mb-4">
                                     <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
                                         Description
