@@ -51,7 +51,7 @@
 
 }
 
-#Catalyst-section {
+/* #Catalyst-section {
    
     opacity: 0;
     transform: translateY(50px);
@@ -71,12 +71,12 @@
       opacity: 1;
       transform: translateY(0);
     }
-  }
+  } */
 
 
 
 
-  #kagura-section {
+  /* #kagura-section {
    
     opacity: 0;
     transform: translateY(50px);
@@ -120,7 +120,7 @@
     }
   }
    
- 
+  */
 
 
   #paragraph{
@@ -215,7 +215,7 @@
 
 
 
-
+/* 
 @keyframes fadeInLeft {
   from {
     opacity: 0;
@@ -257,7 +257,7 @@
   100% {
     max-width: 100%;
   }
-}
+} */
 
 /* #section {
   border-radius: 1px 25px 25px 1px;
