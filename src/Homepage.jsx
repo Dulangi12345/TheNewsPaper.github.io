@@ -15,7 +15,7 @@ const Homepage = () => {
       style={{ scaleX: scrollYprogress }}
     >
       <p
-        className="text-7xl text-center text-black  w-2/3 m-auto  mt-16"
+        className="lg:text-7xl md:text-7xl text-center text-black  lg:w-2/3 m-auto  mt-16 w-full text-4xl"
         id="welcome-paragraph"
       >
         Welcome to the world of APIIT news
