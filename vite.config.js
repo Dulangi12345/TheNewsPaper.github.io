@@ -5,15 +5,15 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 
 const manifestForPlugin = {
-  name: 'TheCatalyst',
-  short_name: 'TheCatalyst',
-  start_url: '/TheCatalyst/',
-  scope: './',
-  display: 'standalone',
-  background_color: '#ffffff',
-  theme_color: '#ffffff',
-  orientation : 'portrait',
-  description : 'The Catalyst ',
+  name: "The-Catalyst",
+  short_name: "The-Catalyst",
+  start_url: "/The-Catalyst/",
+  scope: "./",
+  display: "standalone",
+  background_color: "#ffffff",
+  theme_color: "#ffffff",
+  orientation : "portrait",
+  description : "The-Catalyst",
 
   icons :[
     {
@@ -54,7 +54,7 @@ const manifestForPlugin = {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: './',
+  base: "./",
   plugins: [
     react(),
     VitePWA ({
