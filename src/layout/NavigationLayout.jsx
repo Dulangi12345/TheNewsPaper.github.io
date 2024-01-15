@@ -265,6 +265,9 @@ const NavigationLayout = () => {
                   <div className="text-black hover:underline rounded-md px-3 py-2 text-sm font-medium">
                     <Link to="/catalyst/homepage">Catalyst Homepage</Link>
                   </div>
+                  <div>
+                        <DropdownMenu />
+                      </div>
 
                   <div className="text-black hover:underline rounded-md px-3 py-2 text-sm font-medium">
                     <Link to="/catalyst/current-events">Current Events</Link>
