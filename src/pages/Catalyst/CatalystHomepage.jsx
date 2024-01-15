@@ -33,7 +33,7 @@ const CatalystHomepage = () => {
         <div>
                 {Loading == false ? (
                 <div>
-                   <div className='mx-32 mt-10'>
+                   <div className='lg:mx-32 mt-10'>
 
                     <div className="flex flex-wrap">
                         <div className="p-2">

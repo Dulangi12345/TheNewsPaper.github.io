@@ -60,7 +60,7 @@ const CurrentEvents = () => {
 
     return (
         <div>
-        <div className='mx-24 mt-24'>
+        <div className='lg:mx-24 mt-24'>
             {firstArticleIndex >= 0 && secondArticleIndex >= 0 && secondArticleIndex < ArticlesData.length ? (
                 <Row>
                     <Col md={8}>
