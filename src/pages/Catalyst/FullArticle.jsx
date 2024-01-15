@@ -55,7 +55,7 @@ const FullArticle = () => {
 
     return (
         <div>
-            <div className='mx-32 mt-10'>
+            <div className='lg:mx-32 mt-10'>
                 {loading ? (
                     <div className="flex items-center justify-center">
                         <p className='text-md'>Loading...</p>
