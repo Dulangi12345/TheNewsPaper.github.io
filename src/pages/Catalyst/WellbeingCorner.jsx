@@ -32,7 +32,7 @@ const WellbeingCorner = () => {
     return (
        
 
-            <div className='mx-32 mt-10'>
+            <div className='lg:mx-32 mt-10'>
                 {Loading == false ? (
                     <div>
                     <div className="flex flex-wrap">
