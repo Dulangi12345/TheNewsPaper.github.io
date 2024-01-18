@@ -53,7 +53,7 @@ const FreeArticle = () => {
                 src={article.image1}
                 alt=""
                 id="free-article-header-image"
-                className="w-full h-[800px] object-fill mt-4"
+                className="w-full lg:h-[800px] object-fill mt-4"
               />
 
               <div
@@ -77,13 +77,13 @@ const FreeArticle = () => {
                   src={article.image2}
                   alt=""
                   id="free-articles-sub-images"
-                  className="w-[500px] h-[500px] m-auto left-0 right-0"
+                  className="w-[500px] lg:h-[500px] h-[300px] m-auto left-0 right-0"
                 />
                 <img
                   src={article.image3}
                   alt=""
                   id="free-articles-sub-images"
-                  className="w-[500px] h-[500px] m-auto left-0 right-0"
+                  className="w-[500px] lg:h-[500px]  h-[300px] m-auto left-0 right-0"
                 />
               </div>
             </div>
