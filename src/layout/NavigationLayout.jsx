@@ -191,7 +191,7 @@ const NavigationLayout = () => {
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
                       <div className="text-black hover:underline  rounded-md px-3 py-2 text-sm font-medium">
-                        <Link to="/">Home</Link>
+                        <Link to="/The-Catalyst/">Home</Link>
                       </div>
                       <div className="text-black hover:underline  rounded-md px-3 py-2 text-sm font-medium">
                         <Link to="/catalyst/homepage">Catalyst Homepage</Link>
@@ -259,7 +259,7 @@ const NavigationLayout = () => {
               >
                 <div className="space-y-1 px-2 pb-3 pt-2">
                   <div className="text-black hover:underline rounded-md px-3 py-2 text-sm font-medium">
-                    <Link to="/">Home</Link>
+                    <Link to="/The-Catalyst/">Home</Link>
                   </div>
 
                   <div className="text-black hover:underline rounded-md px-3 py-2 text-sm font-medium">
