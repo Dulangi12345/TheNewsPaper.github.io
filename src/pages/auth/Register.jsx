@@ -82,8 +82,8 @@ const Register = () => {
         }
       );
 
-      const data = await response.json();
-      console.log(data);
+      const status = response.status;
+      console.log(status);
       await handleRegister(name, email, password);
     } catch (error) {
       console.log(error);
