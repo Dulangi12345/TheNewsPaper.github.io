@@ -44,7 +44,7 @@ const CatalystHomepage = () => {
                                 <h3 className=" text-xl italic text-center mb-10">
                                     {articleData.articleAuthor}
                                 </h3>
-                                <img src={articleData.articleImage} alt="Homepage Image" className="w-full h-[800px] object-fill mt-4" />
+                                <img src={articleData.articleImage} alt="Homepage Image" className="w-full lg:h-[800px] object-fill mt-4 " />
                                 <p className="text-gray-700 mt-14 text-xl"
                                 id="article-content"
                                  style={{ whiteSpace: 'pre-line' }}>{articleData.articleDescription}</p>

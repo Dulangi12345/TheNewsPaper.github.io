@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import photo from "./assets/logo.png";
 import photo2 from "./assets/kaguralogo.png";
 import photo3 from "./assets/CTTlogo.png";
 import Footer from "./layout/footer";
 import DropdownMenu from "./layout/dropdown";
 import { motion, useScroll } from "framer-motion";
+import PaymentForm from "./components/PaymentForm";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
   const { scrollYprogress } = useScroll();
+  const navigate = useNavigate();
+
+ 
+
+
   return (
     <motion.div
       className="flex flex-col "
@@ -15,7 +22,7 @@ const Homepage = () => {
       style={{ scaleX: scrollYprogress }}
     >
       <p
-        className="lg:text-7xl md:text-7xl text-center text-black  w-2/3 m-auto  mt-16 w-full text-4xl "
+        className="lg:text-7xl text-center text-black  w-2/3 m-auto  mt-16 w-full text-6xl "
         id="welcome-paragraph"
       >
         Welcome to the world of APIIT news
@@ -26,14 +33,14 @@ const Homepage = () => {
             <h2>IDK What to say</h2> */}
 
         <div className="">
-          <ul id="list-motto" className="mt-20 ">
-            <li className="text-6xl text-left font-bold w-2/3 m-auto text-cyan-700  leading-snug fadeInLeft delay-1">
+          <ul id="list-motto" className="lg:mt-20 mt-10 lg:text-left  text-center lg:text-6xl  text-5xl">
+            <li className=" font-bold w-2/3 m-auto text-cyan-700  leading-snug fadeInLeft delay-1">
               Integrity
             </li>
-            <li className="text-6xl text-left font-bold w-2/3 m-auto text-red-600  leading-snug  fadeInLeft delay-2">
+            <li className=" font-bold w-2/3 m-auto text-red-600  leading-snug  fadeInLeft delay-2">
               Valor
             </li>
-            <li className="text-6xl text-left font-bold w-2/3 m-auto fadeInLeft leading-snug  delay-3">
+            <li className=" font-bold w-2/3 m-auto fadeInLeft leading-snug  delay-3">
               Dedication
             </li>
           </ul>
@@ -47,9 +54,18 @@ const Homepage = () => {
               around the world. Read our articles and get to know about the
               latest news and events.
             </p>
-            <button className="bg-none rounded-full border-2  border-black text-lg m-auto mt-10 p-4 w-2/3 ">
+            <button 
+            //go to register page on click
+            onClick={
+              () => {
+                navigate('/register');
+              }
+            }
+            
+            className="bg-none rounded-full border-2  border-black text-lg m-auto mt-10 p-4 w-2/3  ">
               Subscribe
             </button>
+           
           </div>
         </div>
 
