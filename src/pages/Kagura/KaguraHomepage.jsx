@@ -1,11 +1,11 @@
 import React from 'react';
 
-const KatalystHomepage = () => {
+const KaguraHomepage = () => {
     return (
         <div>
-        <h1>Katalyst Homepage</h1>
+        <h1>Kagura Homepage</h1>
         </div>
     );
 };
 
-export default KatalystHomepage;
+export default KaguraHomepage;

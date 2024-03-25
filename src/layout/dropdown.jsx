@@ -1,21 +1,70 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { db } from "../firebase";
+import { collection , query  , getDocs } from "firebase/firestore/lite";
+import { useNavigate } from "react-router-dom";
 
 const DropdownMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [selectedIndex, setSelectedIndex] = useState(null);
+    const [articles, setArticles] = useState([]);
+    const navigate = useNavigate(); 
+
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
 
+
+    const handleSelectedArticle = (index) => {
+        setSelectedIndex(index);
+        setIsOpen(false);
+        const articleId = articles[index].id;
+        console.log(articleId);
+        navigate(`/catalyst/free-articles/${articleId}`);
+        
+     };
+
+
+    useEffect(() => {
+        fetchArticleIndices();
+    }, []);
+
+
+    const fetchArticleIndices = async () => {
+        try {
+
+            const collectionReference = collection(db, "CatalystFreeArticles");
+            const querySnapshot = await getDocs(collectionReference);
+
+            const articles = [];
+            querySnapshot.forEach((doc) => {
+                const article = doc.data();
+                article.id = doc.id;
+                articles.push(article);
+            });
+
+            setArticles(articles);
+  
+        } catch (error) {
+            console.log(error); 
+        }
+
+
+    }
+
+ 
+
+
     return (
         <div className="relative">
             <button
                 id="dropdownDefaultButton"
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className=" focus:outline-none  rounded-lg    text-center inline-flex items-center hover:underline block rounded-md px-3 py-1  font-bold"
                 type="button"
                 onClick={toggleDropdown} // Toggle dropdown visibility on button click
             >
-                Dropdown button{" "}
+                Free Articles{" "}
                 <svg
                     className={`w-2.5 h-2.5 ml-2.5 transform transition-transform ${isOpen ? "rotate-180" : ""
                         }`}
@@ -34,41 +83,27 @@ const DropdownMenu = () => {
                 </svg>
             </button>
 
-            {isOpen && ( // Render dropdown menu if isOpen state is true
+            {isOpen && (
                 <div className="z-10 absolute top-full left-0 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-                        <li>
-                            <a
-                                href="#"
-                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                                Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                                Settings
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                                Earnings
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                                Sign out
-                            </a>
-                        </li>
+                     {
+                            articles.map((article, index) => (
+                                <li key={article.id} className="hover:underline block rounded-md px-3 py-2 text-base font-bold">
+                                  
+                                    <Link
+                                        className={`block px-5 py-3 transition duration-150 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-600 ${selectedIndex === index ? "bg-gray-100 dark:bg-gray-600" : ""
+                                            }`}
+                                        to={`/catalyst/free-articles/${article.id}`}
+                                        onClick={() => handleSelectedArticle(index)}
+                                    >
+                                        {article.title}
+                                        
+                                    </Link>
+                                 
+
+                                </li>
+                            ))
+                     }
                     </ul>
                 </div>
             )}
