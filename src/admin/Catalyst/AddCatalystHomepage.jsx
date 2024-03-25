@@ -126,7 +126,6 @@ const AddCatalystHomepage = () => {
         }
 
 
-
         const fileRef = ref(storageRef, `CatalystHomepageImages/${title}/${articleImage.name}`);
         const metadata = {
           contentType: articleImage.type,

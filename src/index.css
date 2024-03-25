@@ -1,3 +1,155 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+
+
+#homepage-bg{
+    width: 100%;
+    height: 100vh;
+    /* background-image: url('assets/BG2.png'); 
+    background-size: contain;
+    background-repeat: no-repeat; */
+
+
+}
+
+#welcome-paragraph {
+  font-family: 'Playfair Display', serif;
+  animation:  fadeInUp 2.5s forwards;
+ 
+}
+
+#nav-links{
+  font-family: 'Playfair Display', serif;
+
+}
+
+#anime-heading{
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+
+
+
+
+
+
+#Catalyst-section h1 {
+
+  font-family: 'IBM Plex Sans', sans-serif;
+
+ 
+}
+
+#about-us-paragraph{
+  font-family: 'IBM Plex Sans', sans-serif;
+ 
+ 
+
+}
+
+
+
+
+
+
+ 
+
+
+  #paragraph{
+    font-family: 'IBM Plex Sans', sans-serif;
+    
+
+  }
+
+
+  #anime-name {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background-color: #000;
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+  #anime-content{
+    font-family: 'IBM Plex Sans', sans-serif;
+
+  }
+
+  #quiz-heading{
+    font-family: 'Lilita One', sans-serif;
+  }
+
+
+
+
+
+  
+#anime-image {
+   
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 2.5s ease, transform 2.5s ease;
+}
+
+ #anime-image.in-view {
+  animation: fadeInUp 2.5s forwards;
+}
+
+#list-motto.in-view {
+  animation: fadeInLeft 2.5s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+#quiz-name{
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+
+
+#quiz-Content{
+  font-family: 'IBM Plex Sans', sans-serif;
+  background-image: url('assets/animeBG.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding: 20px;
+
+}
+
+
+
+#article-content {
+  font-family: 'PT Serif', serif;
+ 
+}
+
+#free-article-content::first-letter {
+  font-size: larger;
+  font-weight: bold;
+
+}
+
+
+#article-title{
+   font-family: 'PT Serif', serif; 
+} 
+
+
+#payment-form::-webkit-scrollbar{
+  display: none;
+  
+}
